@@ -1,0 +1,7 @@
+<!DOCTYPE svg>
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="60" fill="#e9ecef"/>
+  <circle cx="60" cy="45" r="20" fill="#0B7285"/>
+  <circle cx="60" cy="85" r="25" fill="#66D9E8"/>
+  <text x="60" y="105" text-anchor="middle" fill="#666" font-size="10" font-family="Arial">Team</text>
+</svg>

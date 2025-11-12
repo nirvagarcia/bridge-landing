@@ -1,0 +1,116 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "about": "Nosotros",
+    "impact": "Impacto",
+    "howItWorks": "Cómo funciona",
+    "team": "Equipo",
+    "vision": "Visión",
+    "download": "Descargar"
+  },
+  "hero": {
+    "title": "Traduce Lengua de Señas Peruana a texto y voz",
+    "subtitle": "Bridge es una app inclusiva impulsada por IA, desarrollada en Lima, Perú.",
+    "description": "Rompemos las barreras de comunicación con tecnología de vanguardia que convierte la Lengua de Señas Peruana en texto y voz en tiempo real.",
+    "downloadButton": "Descargar APK para Android",
+    "watchDemo": "Ver Demo",
+    "availableOn": "Disponible en"
+  },
+  "about": {
+    "title": "Inclusión a través de la innovación",
+    "subtitle": "Creando puentes de comunicación",
+    "description": "Bridge nace de la necesidad de crear una sociedad más inclusiva. Nuestra misión es empoderar a la comunidad sorda peruana mediante tecnología accesible e innovadora.",
+    "mission": "Nuestra Misión",
+    "missionText": "Democratizar la comunicación y eliminar las barreras lingüísticas para la comunidad sorda en el Perú.",
+    "vision": "Nuestra Visión",
+    "visionText": "Ser la plataforma líder en traducción de lengua de señas en América Latina, promoviendo la inclusión digital.",
+    "values": "Nuestros Valores",
+    "valuesText": "Inclusión, innovación, accesibilidad y compromiso social guían cada decisión que tomamos."
+  },
+  "impact": {
+    "title": "Impacto real en la comunidad",
+    "subtitle": "Transformando vidas a través de la tecnología",
+    "users": "Usuarios activos",
+    "translations": "Traducciones realizadas",
+    "accuracy": "Precisión promedio",
+    "satisfaction": "Satisfacción del usuario",
+    "testimonial": "Bridge ha cambiado mi manera de comunicarme. Ahora puedo expresar mis ideas sin barreras.",
+    "testimonialAuthor": "Rosa, usuaria de Bridge",
+    "communityTitle": "Construyendo comunidad",
+    "communityText": "Trabajamos directamente con la comunidad sorda peruana para asegurar que nuestra tecnología responda a sus necesidades reales."
+  },
+  "howItWorks": {
+    "title": "Cómo funciona Bridge",
+    "subtitle": "Tecnología simple, resultados poderosos",
+    "step1Title": "Captura",
+    "step1Description": "La cámara detecta y captura los movimientos de las manos en tiempo real",
+    "step2Title": "Procesamiento",
+    "step2Description": "La IA analiza los gestos usando modelos entrenados específicamente para LSP",
+    "step3Title": "Traducción",
+    "step3Description": "El texto y audio se generan instantáneamente en español claro y natural",
+    "features": "Características principales",
+    "realTime": "Traducción en tiempo real",
+    "realTimeDesc": "Velocidad de procesamiento inferior a 2 segundos",
+    "accuracy": "Alta precisión",
+    "accuracyDesc": "Reconocimiento optimizado para LSP peruano",
+    "accessibility": "Accesible",
+    "accessibilityDesc": "Interfaz diseñada para todos los usuarios"
+  },
+  "team": {
+    "title": "Conoce al equipo",
+    "subtitle": "Innovadores comprometidos con la inclusión",
+    "nirvaRole": "Ingeniera de Software & IA",
+    "nirvaDescription": "Ingeniera de software apasionada por crear tecnología que genere impacto social positivo.",
+    "michelleRole": "Desarrolladora FullStack",
+    "michelleDescription": "Desarrolladora enfocada en crear experiencias inclusivas y centradas en el usuario.",
+    "location": "Basado en Lima, Perú",
+    "collaboration": "¿Quieres colaborar?",
+    "collaborationText": "Estamos siempre buscando personas apasionadas por la inclusión y la tecnología.",
+    "joinUs": "Únete a nosotros"
+  },
+  "vision": {
+    "title": "Nuestra visión del futuro",
+    "subtitle": "Expandiendo el impacto de Bridge",
+    "expansion": "Expansión regional",
+    "expansionText": "Llevar Bridge a otros países de América Latina, adaptando la tecnología a diferentes variaciones de lengua de señas.",
+    "education": "Educación inclusiva",
+    "educationText": "Desarrollar herramientas educativas que faciliten el aprendizaje de LSP para personas oyentes.",
+    "community": "Fortalecimiento comunitario",
+    "communityText": "Crear una red de apoyo y recursos para la comunidad sorda en toda la región.",
+    "partnership": "¿Interesado en ser parte del cambio?",
+    "contact": "Contáctanos"
+  },
+  "download": {
+    "title": "Descarga Bridge hoy",
+    "subtitle": "Comienza a romper barreras de comunicación",
+    "android": "Descargar para Android",
+    "comingSoon": "Próximamente en iOS",
+    "requirements": "Requisitos del sistema",
+    "androidVersion": "Android 8.0 o superior",
+    "storage": "500 MB de espacio disponible",
+    "camera": "Cámara frontal requerida",
+    "internet": "Conexión a internet estable"
+  },
+  "footer": {
+    "tagline": "Rompiendo barreras, construyendo puentes",
+    "quickLinks": "Enlaces rápidos",
+    "contact": "Contacto",
+    "social": "Síguenos",
+    "legal": "Legal",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de uso",
+    "copyright": "© 2025 Bridge App. Todos los derechos reservados.",
+    "madeIn": "Lima, Perú"
+  },
+  "common": {
+    "learnMore": "Conoce más",
+    "getStarted": "Comenzar",
+    "comingSoon": "Próximamente",
+    "loading": "Cargando...",
+    "error": "Error",
+    "tryAgain": "Intentar de nuevo",
+    "close": "Cerrar",
+    "menu": "Menú",
+    "language": "Idioma"
+  }
+}

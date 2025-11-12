@@ -1,0 +1,116 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "impact": "Impact",
+    "howItWorks": "How it works",
+    "team": "Team",
+    "vision": "Vision",
+    "download": "Download"
+  },
+  "hero": {
+    "title": "Translate Peruvian Sign Language into text and voice",
+    "subtitle": "Bridge is an inclusive AI-powered app developed in Lima, Peru.",
+    "description": "We break communication barriers with cutting-edge technology that converts Peruvian Sign Language into text and voice in real-time.",
+    "downloadButton": "Download APK for Android",
+    "watchDemo": "Watch Demo",
+    "availableOn": "Available on"
+  },
+  "about": {
+    "title": "Inclusion through innovation",
+    "subtitle": "Building communication bridges",
+    "description": "Bridge was born from the need to create a more inclusive society. Our mission is to empower the Peruvian deaf community through accessible and innovative technology.",
+    "mission": "Our Mission",
+    "missionText": "Democratize communication and eliminate language barriers for the deaf community in Peru.",
+    "vision": "Our Vision",
+    "visionText": "To be the leading sign language translation platform in Latin America, promoting digital inclusion.",
+    "values": "Our Values",
+    "valuesText": "Inclusion, innovation, accessibility and social commitment guide every decision we make."
+  },
+  "impact": {
+    "title": "Real impact in the community",
+    "subtitle": "Transforming lives through technology",
+    "users": "Active users",
+    "translations": "Translations made",
+    "accuracy": "Average accuracy",
+    "satisfaction": "User satisfaction",
+    "testimonial": "Bridge has changed the way I communicate. Now I can express my ideas without barriers.",
+    "testimonialAuthor": "Rosa, Bridge user",
+    "communityTitle": "Building community",
+    "communityText": "We work directly with the Peruvian deaf community to ensure our technology responds to their real needs."
+  },
+  "howItWorks": {
+    "title": "How Bridge works",
+    "subtitle": "Simple technology, powerful results",
+    "step1Title": "Capture",
+    "step1Description": "The camera detects and captures hand movements in real-time",
+    "step2Title": "Processing",
+    "step2Description": "AI analyzes gestures using models trained specifically for PSL",
+    "step3Title": "Translation",
+    "step3Description": "Text and audio are generated instantly in clear and natural Spanish",
+    "features": "Key features",
+    "realTime": "Real-time translation",
+    "realTimeDesc": "Processing speed under 2 seconds",
+    "accuracy": "High precision",
+    "accuracyDesc": "Recognition optimized for Peruvian PSL",
+    "accessibility": "Accessible",
+    "accessibilityDesc": "Interface designed for all users"
+  },
+  "team": {
+    "title": "Meet the team",
+    "subtitle": "Innovators committed to inclusion",
+    "nirvaRole": "AI & Software Engineer",
+    "nirvaDescription": "Software engineer passionate about creating technology that generates positive social impact.",
+    "michelleRole": "FullStack Developer",
+    "michelleDescription": "Developer focused on creating inclusive and user-centered experiences.",
+    "location": "Based in Lima, Peru",
+    "collaboration": "Want to collaborate?",
+    "collaborationText": "We are always looking for people passionate about inclusion and technology.",
+    "joinUs": "Join us"
+  },
+  "vision": {
+    "title": "Our vision of the future",
+    "subtitle": "Expanding Bridge's impact",
+    "expansion": "Regional expansion",
+    "expansionText": "Bring Bridge to other Latin American countries, adapting technology to different sign language variations.",
+    "education": "Inclusive education",
+    "educationText": "Develop educational tools that facilitate PSL learning for hearing people.",
+    "community": "Community strengthening",
+    "communityText": "Create a support network and resources for the deaf community throughout the region.",
+    "partnership": "Interested in being part of the change?",
+    "contact": "Contact us"
+  },
+  "download": {
+    "title": "Download Bridge today",
+    "subtitle": "Start breaking communication barriers",
+    "android": "Download for Android",
+    "comingSoon": "Coming soon on iOS",
+    "requirements": "System requirements",
+    "androidVersion": "Android 8.0 or higher",
+    "storage": "500 MB of available space",
+    "camera": "Front camera required",
+    "internet": "Stable internet connection"
+  },
+  "footer": {
+    "tagline": "Breaking barriers, building bridges",
+    "quickLinks": "Quick links",
+    "contact": "Contact",
+    "social": "Follow us",
+    "legal": "Legal",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "copyright": "© 2025 Bridge. All rights reserved.",
+    "madeIn": "Lima, Peru"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "comingSoon": "Coming soon",
+    "loading": "Loading...",
+    "error": "Error",
+    "tryAgain": "Try again",
+    "close": "Close",
+    "menu": "Menu",
+    "language": "Language"
+  }
+}
