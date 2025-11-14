@@ -1,6 +1,30 @@
-import { redirect } from 'next/navigation';
-import { APP_CONFIG } from '../utils/constants';
+'use client';
 
-export default function RootPage() {
-  redirect(`/${APP_CONFIG.defaultLanguage}`);
+import {
+  Hero,
+  About,
+  Impact,
+  HowItWorks,
+  Team,
+  Vision,
+  DownloadSection,
+} from '../modules';
+import { Navbar, Footer } from '../shared/components';
+
+export default function HomePage() {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Impact />
+        <HowItWorks />
+        <Team />
+        <Vision />
+        <DownloadSection />
+      </main>
+      <Footer />
+    </>
+  );
 }

@@ -35,7 +35,7 @@ export const Team = () => {
       description: t('michelleDescription'),
       avatar: '/placeholders/michelle-profile.jpg',
       social: {
-        linkedin: 'https://www.linkedin.com/in/michelle-moreno/',
+        linkedin: 'https://www.linkedin.com/in/michelle-moreno-best-1ba33b297/',
         github: 'https://github.com/MichelleFMB',
       },
     },

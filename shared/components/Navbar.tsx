@@ -10,26 +10,19 @@ import {
   MenuItem,
   useTheme,
   useMediaQuery,
-  Select,
-  FormControl,
   Typography,
 } from '@mui/material';
-import { Menu as MenuIcon, Language as LanguageIcon } from '@mui/icons-material';
+import { Menu as MenuIcon } from '@mui/icons-material';
 import { useState } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Button } from './Button';
-import { APP_CONFIG } from '../../utils/constants';
+import { LanguageSelector } from './LanguageSelector';
 
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [langAnchorEl, setLangAnchorEl] = useState<null | HTMLElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const t = useTranslations('navigation');
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
 
   const navigationItems = [
     { key: 'about', href: '#about' },
@@ -45,22 +38,6 @@ export const Navbar = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleLanguageOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setLangAnchorEl(event.currentTarget);
-  };
-
-  const handleLanguageClose = () => {
-    setLangAnchorEl(null);
-  };
-
-  const handleLanguageChange = (newLocale: string) => {
-    const segments = pathname.split('/');
-    segments[1] = newLocale;
-    const newPath = segments.join('/');
-    router.push(newPath as any);
-    handleLanguageClose();
   };
 
   const scrollToSection = (href: string) => {
@@ -123,28 +100,7 @@ export const Navbar = () => {
           ) : null}
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <IconButton onClick={handleLanguageOpen} color="primary">
-              <LanguageIcon />
-            </IconButton>
-
-            <Menu
-              anchorEl={langAnchorEl}
-              open={Boolean(langAnchorEl)}
-              onClose={handleLanguageClose}
-            >
-              <MenuItem
-                onClick={() => handleLanguageChange('es')}
-                selected={locale === 'es'}
-              >
-                Español
-              </MenuItem>
-              <MenuItem
-                onClick={() => handleLanguageChange('en')}
-                selected={locale === 'en'}
-              >
-                English
-              </MenuItem>
-            </Menu>
+            <LanguageSelector />
 
             <Button
               variant="contained"

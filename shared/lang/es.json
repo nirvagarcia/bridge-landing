@@ -10,8 +10,7 @@
   },
   "hero": {
     "title": "Traduce Lengua de Señas Peruana a texto y voz",
-    "subtitle": "Bridge es una app inclusiva impulsada por IA, desarrollada en Lima, Perú.",
-    "description": "Rompemos las barreras de comunicación con tecnología de vanguardia que convierte la Lengua de Señas Peruana en texto y voz en tiempo real.",
+    "subtitle": "Rompiendo barreras de comunicación entre personas con DA (Discapacidad Auditiva) y oyentes en el Perú.",
     "downloadButton": "Descargar APK para Android",
     "watchDemo": "Ver Demo",
     "availableOn": "Disponible en"
@@ -19,9 +18,9 @@
   "about": {
     "title": "Inclusión a través de la innovación",
     "subtitle": "Creando puentes de comunicación",
-    "description": "Bridge nace de la necesidad de crear una sociedad más inclusiva. Nuestra misión es empoderar a la comunidad sorda peruana mediante tecnología accesible e innovadora.",
+    "description": "Bridge nace de la necesidad de crear una sociedad más inclusiva. Nuestra misión es empoderar a la comunidad con DA en el Perú mediante tecnología accesible.",
     "mission": "Nuestra Misión",
-    "missionText": "Democratizar la comunicación y eliminar las barreras lingüísticas para la comunidad sorda en el Perú.",
+    "missionText": "Democratizar la comunicación y eliminar las barreras lingüísticas para la comunidad con DA en el Perú.",
     "vision": "Nuestra Visión",
     "visionText": "Ser la plataforma líder en traducción de lengua de señas en América Latina, promoviendo la inclusión digital.",
     "values": "Nuestros Valores",
@@ -30,14 +29,14 @@
   "impact": {
     "title": "Impacto real en la comunidad",
     "subtitle": "Transformando vidas a través de la tecnología",
-    "users": "Usuarios activos",
+    "users": "Usuarios en Bridge",
     "translations": "Traducciones realizadas",
     "accuracy": "Precisión promedio",
     "satisfaction": "Satisfacción del usuario",
-    "testimonial": "Bridge ha cambiado mi manera de comunicarme. Ahora puedo expresar mis ideas sin barreras.",
+    "testimonial": "Bridge cambiará nuestra manera de comunicación. Ahora podremos expresar nuestras ideas sin barreras.",
     "testimonialAuthor": "Rosa, usuaria de Bridge",
     "communityTitle": "Construyendo comunidad",
-    "communityText": "Trabajamos directamente con la comunidad sorda peruana para asegurar que nuestra tecnología responda a sus necesidades reales."
+    "communityText": "Trabajamos directamente con la comunidad con DA en el Perú para asegurar que nuestra tecnología responda a sus necesidades reales."
   },
   "howItWorks": {
     "title": "Cómo funciona Bridge",

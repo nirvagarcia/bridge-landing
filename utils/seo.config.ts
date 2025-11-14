@@ -49,12 +49,11 @@ export const generateMetadata = (
       : 'Bridge is an AI-powered app that translates Peruvian Sign Language (PSL) to text and voice in real-time. Inclusion and innovation from Lima, Peru.');
 
   return {
+    metadataBase: new URL(baseUrl),
     title: localizedTitle,
     description: localizedDescription,
     keywords: seoConfig.keywords,
     robots: 'index, follow',
-    viewport: 'width=device-width, initial-scale=1',
-    themeColor: '#0B7285',
     manifest: '/manifest.json',
     icons: {
       icon: [

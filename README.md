@@ -19,14 +19,14 @@ Su landing page está desarrollada con **Next.js 15**, **React 19** y **Material
 
 ## 🚀 Tecnologías principales
 
-| Categoría | Tecnologías |
-|------------|-------------|
-| Framework principal | **Next.js 15 (App Router)** |
-| Librería UI | **Material UI (MUI v6)** |
-| Lenguaje | **TypeScript** |
-| Internacionalización | **next-intl (ES/EN)** |
-| Estilo visual | MUI Theme personalizado |
-| SEO | Configuración avanzada (metadata, OpenGraph, canonical) |
+| Categoría            | Tecnologías                                             |
+| -------------------- | ------------------------------------------------------- |
+| Framework principal  | **Next.js 15 (App Router)**                             |
+| Librería UI          | **Material UI (MUI v6)**                                |
+| Lenguaje             | **TypeScript**                                          |
+| Internacionalización | **next-intl (ES/EN)**                                   |
+| Estilo visual        | MUI Theme personalizado                                 |
+| SEO                  | Configuración avanzada (metadata, OpenGraph, canonical) |
 
 ## 🎨 Paleta y estilo
 
@@ -42,7 +42,7 @@ El diseño es **limpio, accesible y responsivo**, con un enfoque **mobile-first*
 
 ## 🌍 Idiomas
 
-- **Español** (por defecto)  
+- **Español** (por defecto)
 - **Inglés**
 
 El sistema de idiomas utiliza `next-intl`, con archivos JSON en `/shared/lang/`.
@@ -52,18 +52,18 @@ El sistema de idiomas utiliza `next-intl`, con archivos JSON en `/shared/lang/`.
 ## 🌟 Objetivo del proyecto
 
 > “Bridge nació con la misión de **conectar personas, romper barreras y hacer visible la comunicación en todas sus formas**.”  
-> Nuestra visión es construir un puente tecnológico que promueva la **inclusión**, la **accesibilidad** y la **innovación social** en el Perú y Latinoamérica.  
->  
+> Nuestra visión es construir un puente tecnológico que promueva la **inclusión**, la **accesibilidad** y la **innovación social** en el Perú y Latinoamérica.
+>
 > A través de inteligencia artificial, buscamos que la Lengua de Señas Peruana (LSP) sea comprendida y difundida, integrando a más personas en la conversación digital.
 
 ---
 
 ## 👩‍💻 Equipo de desarrollo
 
-| Nombre | Rol | Ciudad |
-|---------|-----|--------|
-| **Nirvana García** | AI & Software Engineer | Lima, Perú 🇵🇪 |
-| **Michelle Moreno** | FullStack Developer | Lima, Perú 🇵🇪 |
+| Nombre              | Rol                    | Ciudad        |
+| ------------------- | ---------------------- | ------------- |
+| **Nirvana García**  | AI & Software Engineer | Lima, Perú 🇵🇪 |
+| **Michelle Moreno** | FullStack Developer    | Lima, Perú 🇵🇪 |
 
 ---
 
@@ -77,3 +77,4 @@ El sistema de idiomas utiliza `next-intl`, con archivos JSON en `/shared/lang/`.
 
 > “La inclusión no es un destino, es un puente que construimos cada día.” 🌉
 
+npm run dev

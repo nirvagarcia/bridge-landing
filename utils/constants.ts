@@ -1,7 +1,8 @@
 export const APP_CONFIG = {
   name: 'Bridge',
   tagline: 'Traduce LSP en tiempo real',
-  description: 'Bridge es una app de inteligencia artificial que traduce Lengua de Señas Peruana (LSP) a texto y voz en tiempo real. Inclusión e innovación desde Lima, Perú.',
+  description:
+    'Bridge es una app de inteligencia artificial que traduce Lengua de Señas Peruana (LSP) a texto y voz en tiempo real. Inclusión e innovación desde Lima, Perú.',
   url: 'https://bridge.dev',
   email: 'hello@bridge.dev',
   social: {
@@ -19,7 +20,7 @@ export const APP_CONFIG = {
     {
       name: 'Michelle Moreno',
       role: 'Co-Founder & UX Designer',
-      linkedin: 'https://linkedin.com/in/michelle-moreno',
+      linkedin: 'https://www.linkedin.com/in/michelle-moreno-best-1ba33b297/',
     },
   ],
   location: 'Lima, Peru',
@@ -45,5 +46,5 @@ export const BREAKPOINTS = {
   desktop: 1440,
 } as const;
 
-export type Language = typeof APP_CONFIG.languages[number];
-export type Section = typeof SECTIONS[keyof typeof SECTIONS];
+export type Language = (typeof APP_CONFIG.languages)[number];
+export type Section = (typeof SECTIONS)[keyof typeof SECTIONS];
