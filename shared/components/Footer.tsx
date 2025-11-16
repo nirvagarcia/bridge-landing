@@ -104,7 +104,7 @@ export const Footer = () => {
                     letterSpacing: '0.5px',
                   }}
                 >
-                  Conectando el futuro
+                  {t('tagline')}
                 </Typography>
               </Box>
               <Typography
@@ -244,7 +244,7 @@ export const Footer = () => {
                 },
               }}
             >
-              Recursos
+              {t('resources')}
             </Typography>
             <Stack spacing={1.5}>
               <Typography
@@ -344,7 +344,7 @@ export const Footer = () => {
               opacity: 0.8,
             }}
           >
-            <Typography variant="body2">Hecho en Lima, Perú</Typography>
+            <Typography variant="body2">{t('madeIn')}</Typography>
           </Box>
         </Box>
       </Container>

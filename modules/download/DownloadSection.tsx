@@ -119,7 +119,7 @@ export const DownloadSection = () => {
                     opacity: 0.9,
                   }}
                 >
-                  Descarga directa del archivo APK
+                  {t('androidDirect')}
                 </Typography>
                 <Button
                   variant="contained"

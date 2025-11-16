@@ -146,16 +146,27 @@ export const Navbar = () => {
                   onClose={handleMobileMenuClose}
                   sx={{
                     '& .MuiDrawer-paper': {
-                      width: 320,
+                      width: { xs: '100vw', sm: 360 },
+                      maxWidth: '90vw',
                       background:
                         'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%)',
                       backdropFilter: 'blur(20px)',
                       borderLeft: '1px solid rgba(11, 114, 133, 0.1)',
                       boxShadow: '-10px 0 30px rgba(0,0,0,0.1)',
+                      height: '100vh',
+                      overflowY: 'auto',
                     },
                   }}
                 >
-                  <Box sx={{ pt: 3, pb: 2, height: '100%' }}>
+                  <Box
+                    sx={{
+                      pt: 2,
+                      pb: 2,
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
                     <Box
                       sx={{
                         display: 'flex',
@@ -163,6 +174,7 @@ export const Navbar = () => {
                         alignItems: 'center',
                         px: 3,
                         mb: 3,
+                        minHeight: 64,
                       }}
                     >
                       <Typography
@@ -176,7 +188,15 @@ export const Navbar = () => {
                           WebkitTextFillColor: 'transparent',
                         }}
                       >
-                        Bridge
+                        <Box
+                          component="img"
+                          src="/placeholders/bridge_horizontal_logo.png"
+                          alt="Bridge"
+                          sx={{
+                            height: 32,
+                            width: 'auto',
+                          }}
+                        />
                       </Typography>
                       <IconButton
                         onClick={handleMobileMenuClose}
@@ -195,7 +215,7 @@ export const Navbar = () => {
 
                     <Divider sx={{ mb: 2, mx: 2 }} />
 
-                    <List sx={{ px: 0, overflow: 'hidden' }}>
+                    <List sx={{ px: 0, overflow: 'hidden', flex: 1 }}>
                       <AnimatePresence>
                         {navigationItems.map((item, index) => {
                           const IconComponent = item.icon;
@@ -243,7 +263,7 @@ export const Navbar = () => {
 
                     <Divider sx={{ my: 2, mx: 2 }} />
 
-                    <Box sx={{ px: 3, mt: 'auto' }}>
+                    <Box sx={{ px: 3, mt: 'auto', pb: 2 }}>
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

@@ -31,12 +31,22 @@
   "impact": {
     "title": "Real impact in the community",
     "subtitle": "Transforming lives through technology",
-    "users": "Active users",
+    "description": "Each translation represents a moment of connection and understanding in our community.",
+    "users": "Active users on our platform",
+    "usersShort": "Active users",
     "translations": "Translations made",
-    "accuracy": "Average accuracy",
-    "satisfaction": "User satisfaction",
-    "testimonial": "Bridge has changed the way I communicate. Now I can express my ideas without barriers.",
-    "testimonialAuthor": "Rosa, Bridge user",
+    "accuracy": "Accuracy in our translations",
+    "accuracyShort": "Average accuracy",
+    "satisfaction": "Users satisfied with Bridge",
+    "satisfactionShort": "User satisfaction",
+    "testimonial1": "Bridge has given me the confidence to participate more actively in work meetings.",
+    "testimonial2": "Bridge has changed the way I communicate. Now I can express my ideas without barriers.",
+    "testimonial3": "The translation accuracy is incredible. I feel more included in everyday conversations.",
+    "testimonial4": "This app has revolutionized the way I communicate with my deaf students.",
+    "testimonialAuthor1": "Deaf professional",
+    "testimonialAuthor2": "Bridge user",
+    "testimonialAuthor3": "Deaf student",
+    "testimonialAuthor4": "Educator",
     "testimonialsTitle": "What our users say",
     "testimonialsSubtitle": "Real testimonials from people who have transformed their communication with Bridge"
   },
@@ -74,9 +84,9 @@
     "title": "Meet the team",
     "subtitle": "Innovators committed to inclusion",
     "nirvaRole": "AI & Software Engineer | Tech Lead",
-    "nirvaDescription": "Software Engineer specialized in Generative AI and Machine Learning with +2 years building exceptional user experiences. Expert in Python, React, TypeScript, Node.js, and AI technologies like OpenAI and Ollama. Creator of end-to-end fullstack solutions that combine innovative UX/UI with robust backend architectures. Pioneer in ML model implementation for social impact applications.",
+    "nirvaDescription": "AI & Software Engineer with +2 years of experience. Expert in Python, React, TypeScript, and AI technologies. Specialist in creating fullstack solutions that combine innovative UX/UI with ML for social impact.",
     "michelleRole": "Fullstack Developer | Backend Specialist",
-    "michelleDescription": "Fullstack Developer with +1 year experience building robust and scalable web applications. Specialist in backend architectures with Django, MySQL databases, and frontend development with Angular. Expert in RESTful API design, database query optimization, and distributed systems implementation. Focused on creating elegant technical solutions that prioritize performance and user experience.",
+    "michelleDescription": "Fullstack Developer with +1 year of experience. Specialist in Django, MySQL, and Angular. Expert in RESTful APIs, database optimization, and distributed systems.",
     "techStack": "Tech Stack",
     "experience": {
       "nirvana": "+2 years",
@@ -121,9 +131,10 @@
     "contact": "Contact us"
   },
   "download": {
-    "title": "Download Bridge today",
+    "title": "Download Bridge",
     "subtitle": "Start breaking communication barriers",
     "android": "Download for Android",
+    "androidDirect": "Direct APK file download",
     "comingSoon": "Coming soon on iOS",
     "requirements": "System requirements",
     "androidVersion": "Android 8.0 or higher",
@@ -132,15 +143,17 @@
     "internet": "Stable internet connection"
   },
   "footer": {
-    "tagline": "Breaking barriers, building bridges",
+    "tagline": "Connecting the future",
+    "taglineAlt": "Breaking barriers, building bridges",
     "quickLinks": "Quick links",
     "contact": "Contact",
     "social": "Follow us",
     "legal": "Legal",
     "privacy": "Privacy policy",
     "terms": "Terms of use",
+    "resources": "Resources",
     "copyright": "© 2025 Bridge. All rights reserved.",
-    "madeIn": "Lima, Peru"
+    "madeIn": "Made in Lima, Peru"
   },
   "common": {
     "learnMore": "Learn more",

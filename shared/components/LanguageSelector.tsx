@@ -43,28 +43,10 @@ export const LanguageSelector: React.FC = () => {
 
     setIsOpen(false);
 
-    const pathname = window.location.pathname;
-    let newPath: string;
+    document.cookie = `NEXT_LOCALE=${langCode}; path=/; max-age=31536000; SameSite=Lax`;
 
-    if (langCode === 'es') {
-      if (pathname.startsWith('/en')) {
-        newPath = pathname.replace('/en', '') || '/';
-      } else {
-        newPath = pathname;
-      }
-    } else if (langCode === 'en') {
-      if (pathname.startsWith('/en')) {
-        newPath = pathname;
-      } else {
-        newPath = '/en' + pathname;
-      }
-    } else {
-      newPath = pathname;
-    }
-
-    window.location.href = newPath;
+    window.location.reload();
   };
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (

@@ -9,7 +9,7 @@
     "download": "Descargar"
   },
   "hero": {
-    "title": "Traduce Lengua de Señas Peruana a texto y voz",
+    "title": "Traduce Lenguaje de Señas Peruana a texto y voz",
     "subtitle": "Rompiendo barreras de comunicación entre personas con DA (Discapacidad Auditiva) y oyentes en el Perú.",
     "downloadApp": "Descargar APK para Android",
     "downloadButton": "Descargar APK para Android",
@@ -31,12 +31,22 @@
   "impact": {
     "title": "Impacto real en la comunidad",
     "subtitle": "Transformando vidas a través de la tecnología",
-    "users": "Usuarios en Bridge",
+    "description": "Cada traducción representa un momento de conexión y comprensión en nuestra comunidad.",
+    "users": "Usuarios activos en nuestra plataforma",
+    "usersShort": "Usuarios en Bridge",
     "translations": "Traducciones realizadas",
-    "accuracy": "Precisión promedio",
-    "satisfaction": "Satisfacción del usuario",
-    "testimonial": "Bridge cambiará nuestra manera de comunicación. Ahora podremos expresar nuestras ideas sin barreras.",
-    "testimonialAuthor": "Rosa, usuaria de Bridge",
+    "accuracy": "De precisión en nuestras traducciones",
+    "accuracyShort": "Precisión promedio",
+    "satisfaction": "De usuarios satisfechos con Bridge",
+    "satisfactionShort": "Satisfacción del usuario",
+    "testimonial1": "Bridge me ha dado la confianza para participar más activamente en reuniones de trabajo.",
+    "testimonial2": "Bridge ha cambiado mi manera de comunicarme. Ahora puedo expresar mis ideas sin barreras.",
+    "testimonial3": "La precisión de la traducción es increíble. Me siento más incluida en conversaciones cotidianas.",
+    "testimonial4": "Esta app ha revolucionado la forma en que me comunico con mis estudiantes sordos.",
+    "testimonialAuthor1": "Profesional sordo",
+    "testimonialAuthor2": "Usuaria de Bridge",
+    "testimonialAuthor3": "Estudiante sordo",
+    "testimonialAuthor4": "Educadora",
     "testimonialsTitle": "Lo que dicen nuestros usuarios",
     "testimonialsSubtitle": "Testimonios reales de personas que han transformado su comunicación con Bridge"
   },
@@ -74,9 +84,9 @@
     "title": "Conoce al equipo",
     "subtitle": "Innovadores comprometidos con la inclusión",
     "nirvaRole": "AI & Software Engineer | Tech Lead",
-    "nirvaDescription": "Ingeniera de Software especializada en IA Generativa y Machine Learning con +2 años construyendo experiencias de usuario excepcionales. Experta en Python, React, TypeScript, Node.js, y tecnologías de IA como OpenAI y Ollama. Creadora de soluciones fullstack end-to-end que combinan UX/UI innovador con arquitecturas de backend robustas. Pionera en implementación de modelos de ML para aplicaciones de impacto social.",
+    "nirvaDescription": "AI & Software Engineer con +2 años de experiencia. Experta en Python, React, TypeScript y tecnologías de IA. Especialista en crear soluciones fullstack que combinan UX/UI innovador con ML para impacto social.",
     "michelleRole": "Fullstack Developer | Backend Specialist",
-    "michelleDescription": "Desarrolladora Fullstack con +1 año de experiencia construyendo aplicaciones web robustas y escalables. Especialista en arquitecturas backend con Django, bases de datos MySQL, y desarrollo frontend con Angular. Experta en diseño de APIs RESTful, optimización de consultas de base de datos, y implementación de sistemas distribuidos. Enfocada en crear soluciones técnicas elegantes que priorizan performance y experiencia de usuario.",
+    "michelleDescription": "Fullstack Developer con +1 año de experiencia. Especialista en Django, MySQL y Angular. Experta en APIs RESTful, optimización de bases de datos y sistemas distribuidos.",
     "techStack": "Tech Stack",
     "experience": {
       "nirvana": "+2 años",
@@ -119,9 +129,10 @@
     "contact": "Contáctanos"
   },
   "download": {
-    "title": "Descarga Bridge hoy",
+    "title": "Descarga Bridge",
     "subtitle": "Comienza a romper barreras de comunicación",
     "android": "Descargar para Android",
+    "androidDirect": "Descarga directa del archivo APK",
     "comingSoon": "Próximamente en iOS",
     "requirements": "Requisitos del sistema",
     "androidVersion": "Android 8.0 o superior",
@@ -130,15 +141,17 @@
     "internet": "Conexión a internet estable"
   },
   "footer": {
-    "tagline": "Rompiendo barreras, construyendo puentes",
+    "tagline": "Conectando el futuro",
+    "taglineAlt": "Rompiendo barreras, construyendo puentes",
     "quickLinks": "Enlaces rápidos",
     "contact": "Contacto",
     "social": "Síguenos",
     "legal": "Legal",
     "privacy": "Política de privacidad",
     "terms": "Términos de uso",
-    "copyright": "© 2025 Bridge App. Todos los derechos reservados.",
-    "madeIn": "Lima, Perú"
+    "resources": "Recursos",
+    "copyright": "© 2025 Bridge. Todos los derechos reservados.",
+    "madeIn": "Hecho en Lima, Perú"
   },
   "common": {
     "learnMore": "Conoce más",

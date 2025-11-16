@@ -38,34 +38,30 @@ export const Impact = () => {
 
   const testimonials: Testimonial[] = [
     {
-      quote:
-        'Bridge ha cambiado mi manera de comunicarme. Ahora puedo expresar mis ideas sin barreras.',
+      quote: t('testimonial2'),
       author: 'Rosa Mendoza',
-      role: 'Usuaria de Bridge',
+      role: t('testimonialAuthor2'),
       avatar: '/placeholders/user1.jpg',
       rating: 5,
     },
     {
-      quote:
-        'La precisión de la traducción es increíble. Me siento más incluida en conversaciones cotidianas.',
+      quote: t('testimonial3'),
       author: 'Carlos Vega',
-      role: 'Estudiante sordo',
+      role: t('testimonialAuthor3'),
       avatar: '/placeholders/user2.jpg',
       rating: 5,
     },
     {
-      quote:
-        'Esta app ha revolucionado la forma en que me comunico con mis estudiantes sordos.',
+      quote: t('testimonial4'),
       author: 'Prof. Ana López',
-      role: 'Educadora',
+      role: t('testimonialAuthor4'),
       avatar: '/placeholders/user3.jpg',
       rating: 5,
     },
     {
-      quote:
-        'Bridge me ha dado la confianza para participar más activamente en reuniones de trabajo.',
+      quote: t('testimonial1'),
       author: 'Miguel Torres',
-      role: 'Profesional sordo',
+      role: t('testimonialAuthor1'),
       avatar: '/placeholders/user4.jpg',
       rating: 5,
     },
@@ -291,8 +287,7 @@ export const Impact = () => {
                         mx: { xs: 'auto', md: 0 },
                       }}
                     >
-                      Cada traducción representa un momento de conexión y
-                      comprensión en nuestra comunidad.
+                      {t('description')}
                     </Typography>
                   </Box>
 
@@ -592,12 +587,9 @@ export const Impact = () => {
                               lineHeight: 1.5,
                             }}
                           >
-                            {actualIndex === 0 &&
-                              'Usuarios activos en nuestra plataforma'}
-                            {actualIndex === 1 &&
-                              'De precisión en nuestras traducciones'}
-                            {actualIndex === 2 &&
-                              'De usuarios satisfechos con Bridge'}
+                            {actualIndex === 0 && t('users')}
+                            {actualIndex === 1 && t('accuracy')}
+                            {actualIndex === 2 && t('satisfaction')}
                           </Typography>
                         </Card>
                       </motion.div>

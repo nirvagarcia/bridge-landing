@@ -69,15 +69,15 @@ export const Hero = () => {
     <>
       <Box
         sx={{
-          minHeight: { xs: 'auto', md: '100vh' },
-          height: { xs: 'auto', md: '100vh' },
+          minHeight: { xs: '90vh', md: '100vh' },
           position: 'relative',
-          overflow: 'hidden',
+          overflow: { xs: 'visible', md: 'hidden' },
           background:
             'linear-gradient(135deg, #0B7285 0%, #0891b2 50%, #0e7490 100%)',
           display: 'flex',
           alignItems: { xs: 'flex-start', md: 'center' },
-          py: { xs: 8, sm: 10, md: 0 },
+          pt: { xs: 10, sm: 12, md: 8 },
+          pb: { xs: 2, sm: 4, md: 0 },
           '&::before': {
             content: '""',
             position: 'absolute',
@@ -110,7 +110,68 @@ export const Hero = () => {
             },
           },
         }}
+        onMouseMove={e => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+          const glowElement = e.currentTarget.querySelector(
+            '.cursor-glow'
+          ) as HTMLElement;
+          if (glowElement) {
+            glowElement.style.background = `
+              radial-gradient(
+                500px circle at ${x}% ${y}%,
+                rgba(102, 217, 232, 0.15) 0%,
+                rgba(102, 217, 232, 0.08) 25%,
+                rgba(255, 255, 255, 0.04) 50%,
+                transparent 70%
+              )
+            `;
+            glowElement.style.opacity = '1';
+          }
+        }}
+        onMouseEnter={e => {
+          const glowElement = e.currentTarget.querySelector(
+            '.cursor-glow'
+          ) as HTMLElement;
+          if (glowElement) {
+            glowElement.style.opacity = '1';
+          }
+        }}
+        onMouseLeave={e => {
+          const glowElement = e.currentTarget.querySelector(
+            '.cursor-glow'
+          ) as HTMLElement;
+          if (glowElement) {
+            glowElement.style.opacity = '0';
+          }
+        }}
       >
+        <Box
+          className="cursor-glow"
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: `
+              radial-gradient(
+                500px circle at 50% 50%,
+                rgba(102, 217, 232, 0.12) 0%,
+                rgba(102, 217, 232, 0.06) 25%,
+                rgba(255, 255, 255, 0.03) 50%,
+                transparent 70%
+              )
+            `,
+            opacity: 0,
+            transition: 'opacity 0.4s ease-out',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
+
         <Box
           sx={{
             position: 'absolute',
@@ -123,6 +184,7 @@ export const Hero = () => {
             borderRadius: '50%',
             transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
             transition: 'transform 0.3s ease',
+            zIndex: 2,
           }}
         />
 
@@ -138,6 +200,7 @@ export const Hero = () => {
             borderRadius: '50%',
             transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)`,
             transition: 'transform 0.3s ease',
+            zIndex: 2,
           }}
         />
 
@@ -146,16 +209,55 @@ export const Hero = () => {
             position: 'absolute',
             top: '10%',
             left: '5%',
-            width: '60px',
-            height: '60px',
+            width: { xs: '70px', md: '85px' },
+            height: { xs: '70px', md: '85px' },
             background:
-              'linear-gradient(135deg, rgba(102, 217, 232, 0.1), rgba(255, 255, 255, 0.05))',
+              'linear-gradient(135deg, rgba(102, 217, 232, 0.05), rgba(255, 255, 255, 0.02))',
             borderRadius: '50%',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(102, 217, 232, 0.2)',
+            backdropFilter: 'blur(15px)',
+            border: '1px solid rgba(102, 217, 232, 0.1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              background:
+                'linear-gradient(135deg, rgba(102, 217, 232, 0.12), rgba(255, 255, 255, 0.08))',
+              border: '1px solid rgba(102, 217, 232, 0.3)',
+              transform: 'scale(1.1) translateY(-2px)',
+              boxShadow:
+                '0 8px 25px rgba(102, 217, 232, 0.2), inset 0 0 20px rgba(102, 217, 232, 0.1)',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: '-2px',
+                left: '-2px',
+                right: '-2px',
+                bottom: '-2px',
+                background:
+                  'linear-gradient(45deg, transparent, rgba(102, 217, 232, 0.4), transparent)',
+                borderRadius: '50%',
+                zIndex: -1,
+                animation: 'shimmer 1.5s linear infinite',
+              },
+            },
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: '10%',
+              left: '10%',
+              width: '80%',
+              height: '80%',
+              background:
+                'radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 50%)',
+              borderRadius: '50%',
+              pointerEvents: 'none',
+            },
+            '@keyframes shimmer': {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
           }}
         >
           <FloatingIcon delay={0}>
@@ -173,16 +275,51 @@ export const Hero = () => {
             position: 'absolute',
             top: '30%',
             right: '15%',
-            width: '50px',
-            height: '50px',
+            width: { xs: '65px', md: '78px' },
+            height: { xs: '65px', md: '78px' },
             background:
-              'linear-gradient(135deg, rgba(11, 114, 133, 0.1), rgba(255, 255, 255, 0.05))',
+              'linear-gradient(135deg, rgba(11, 114, 133, 0.04), rgba(255, 255, 255, 0.02))',
             borderRadius: '50%',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(11, 114, 133, 0.2)',
+            backdropFilter: 'blur(15px)',
+            border: '1px solid rgba(11, 114, 133, 0.12)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              background:
+                'linear-gradient(135deg, rgba(11, 114, 133, 0.15), rgba(255, 255, 255, 0.08))',
+              border: '1px solid rgba(11, 114, 133, 0.35)',
+              transform: 'scale(1.12) translateY(-3px)',
+              boxShadow:
+                '0 10px 30px rgba(11, 114, 133, 0.25), inset 0 0 25px rgba(11, 114, 133, 0.1)',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: '-3px',
+                left: '-3px',
+                right: '-3px',
+                bottom: '-3px',
+                background:
+                  'linear-gradient(60deg, transparent, rgba(11, 114, 133, 0.5), transparent)',
+                borderRadius: '50%',
+                zIndex: -1,
+                animation: 'shimmer 1.8s linear infinite',
+              },
+            },
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: '15%',
+              left: '15%',
+              width: '70%',
+              height: '70%',
+              background:
+                'radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25), transparent 60%)',
+              borderRadius: '50%',
+              pointerEvents: 'none',
+            },
           }}
         >
           <FloatingIcon delay={1}>
@@ -200,23 +337,58 @@ export const Hero = () => {
             position: 'absolute',
             bottom: '15%',
             right: '25%',
-            width: '45px',
-            height: '45px',
+            width: { xs: '62px', md: '78px' },
+            height: { xs: '62px', md: '78px' },
             background:
-              'linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(255, 255, 255, 0.05))',
+              'linear-gradient(135deg, rgba(8, 145, 178, 0.06), rgba(255, 255, 255, 0.03))',
             borderRadius: '50%',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(8, 145, 178, 0.2)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(8, 145, 178, 0.15)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              background:
+                'linear-gradient(135deg, rgba(8, 145, 178, 0.18), rgba(255, 255, 255, 0.08))',
+              border: '1px solid rgba(8, 145, 178, 0.4)',
+              transform: 'scale(1.15) translateY(-4px)',
+              boxShadow:
+                '0 12px 35px rgba(8, 145, 178, 0.3), inset 0 0 30px rgba(8, 145, 178, 0.12)',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: '-2px',
+                left: '-2px',
+                right: '-2px',
+                bottom: '-2px',
+                background:
+                  'linear-gradient(120deg, transparent, rgba(8, 145, 178, 0.6), transparent)',
+                borderRadius: '50%',
+                zIndex: -1,
+                animation: 'shimmer 2s linear infinite',
+              },
+            },
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: '12%',
+              left: '12%',
+              width: '76%',
+              height: '76%',
+              background:
+                'radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.28), transparent 55%)',
+              borderRadius: '50%',
+              pointerEvents: 'none',
+            },
           }}
         >
           <FloatingIcon delay={2}>
             <Visibility
               sx={{
-                fontSize: 18,
-                color: 'rgba(8, 145, 178, 0.8)',
+                fontSize: { xs: '20px', md: '22px' },
+                color: 'rgba(255, 255, 255, 0.4)',
               }}
             />
           </FloatingIcon>
@@ -226,33 +398,79 @@ export const Hero = () => {
           sx={{
             position: 'absolute',
             bottom: '40%',
-            left: '10%',
-            width: '35px',
-            height: '35px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: { xs: '48px', md: '62px' },
+            height: { xs: '48px', md: '62px' },
             background:
-              'linear-gradient(135deg, rgba(102, 217, 232, 0.15), rgba(255, 255, 255, 0.08))',
+              'linear-gradient(135deg, rgba(102, 217, 232, 0.08), rgba(255, 255, 255, 0.04))',
             borderRadius: '50%',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(102, 217, 232, 0.3)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(102, 217, 232, 0.18)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            cursor: 'pointer',
             animation: 'float 6s ease-in-out infinite',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              background:
+                'linear-gradient(135deg, rgba(102, 217, 232, 0.22), rgba(255, 255, 255, 0.1))',
+              border: '1px solid rgba(102, 217, 232, 0.45)',
+              transform: 'translateX(-50%) scale(1.2) translateY(-5px)',
+              boxShadow:
+                '0 15px 40px rgba(102, 217, 232, 0.35), inset 0 0 35px rgba(102, 217, 232, 0.15)',
+              animation: 'floatHover 6s ease-in-out infinite',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: '-3px',
+                left: '-3px',
+                right: '-3px',
+                bottom: '-3px',
+                background:
+                  'linear-gradient(90deg, transparent, rgba(102, 217, 232, 0.7), transparent)',
+                borderRadius: '50%',
+                zIndex: -1,
+                animation: 'shimmer 1.2s linear infinite',
+              },
+            },
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: '8%',
+              left: '8%',
+              width: '84%',
+              height: '84%',
+              background:
+                'radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.35), transparent 45%)',
+              borderRadius: '50%',
+              pointerEvents: 'none',
+            },
             '@keyframes float': {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
+              '0%, 100%': { transform: 'translateX(-50%) translateY(0px)' },
+              '50%': { transform: 'translateX(-50%) translateY(-10px)' },
+            },
+            '@keyframes floatHover': {
+              '0%, 100%': {
+                transform: 'translateX(-50%) scale(1.2) translateY(-5px)',
+              },
+              '50%': {
+                transform: 'translateX(-50%) scale(1.2) translateY(-15px)',
+              },
             },
           }}
         >
           <Typography
             sx={{
-              fontSize: '10px',
-              fontWeight: 600,
-              color: 'white',
+              fontSize: { xs: '12px', md: '14px' },
+              fontWeight: 700,
+              color: 'rgba(255, 255, 255, 0.35)',
               textAlign: 'center',
+              textShadow: '0 2px 8px rgba(0,0,0,0.2)',
             }}
           >
-            AI
+            +
           </Typography>
         </Box>
 
@@ -279,17 +497,27 @@ export const Hero = () => {
             position: 'absolute',
             top: '15%',
             right: '10%',
-            width: '40px',
-            height: '40px',
+            width: { xs: '55px', md: '65px' },
+            height: { xs: '55px', md: '65px' },
             background:
-              'linear-gradient(135deg, rgba(102, 217, 232, 0.1), rgba(255, 255, 255, 0.05))',
+              'linear-gradient(135deg, rgba(102, 217, 232, 0.05), rgba(255, 255, 255, 0.02))',
             borderRadius: '50%',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(102, 217, 232, 0.2)',
+            backdropFilter: 'blur(15px)',
+            border: '1px solid rgba(102, 217, 232, 0.12)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            cursor: 'pointer',
             animation: 'floatSlow 8s ease-in-out infinite',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              background:
+                'linear-gradient(135deg, rgba(102, 217, 232, 0.12), rgba(255, 255, 255, 0.08))',
+              border: '1px solid rgba(102, 217, 232, 0.3)',
+              transform: 'scale(1.1) translateY(-2px)',
+              boxShadow:
+                '0 8px 25px rgba(102, 217, 232, 0.2), inset 0 0 20px rgba(102, 217, 232, 0.1)',
+            },
             '@keyframes floatSlow': {
               '0%, 100%': { transform: 'translateY(0px)' },
               '50%': { transform: 'translateY(-15px)' },
@@ -297,9 +525,14 @@ export const Hero = () => {
           }}
         >
           <Typography
-            sx={{ fontSize: '10px', fontWeight: 600, color: 'white' }}
+            sx={{
+              fontSize: { xs: '14px', md: '16px' },
+              fontWeight: 600,
+              color: 'rgba(255, 255, 255, 0.4)',
+              textShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            }}
           >
-            +
+            AI
           </Typography>
         </Box>
 
@@ -337,7 +570,15 @@ export const Hero = () => {
           }}
         />
 
-        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
+        <Container
+          maxWidth="xl"
+          sx={{
+            position: 'relative',
+            zIndex: 3,
+            px: { xs: 2, sm: 3, md: 3 },
+            width: '100%',
+          }}
+        >
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6}>
               <motion.div
@@ -348,7 +589,7 @@ export const Hero = () => {
                 <Box
                   sx={{
                     color: 'white',
-                    mb: { xs: 2, md: 4 },
+                    mb: { xs: 1, md: 4 },
                     px: { xs: 1, sm: 2, md: 0 },
                   }}
                 >
@@ -363,12 +604,12 @@ export const Hero = () => {
                         fontWeight: 800,
                         mb: { xs: 1.5, sm: 2, md: 3 },
                         fontSize: {
-                          xs: '1.1rem',
-                          sm: '1.4rem',
+                          xs: '2.5rem',
+                          sm: '2.4rem',
                           md: '2.8rem',
                           lg: '3.5rem',
                         },
-                        lineHeight: { xs: 1.4, sm: 1.3, md: 1.1 },
+                        lineHeight: { xs: 1.3, sm: 1.3, md: 1.1 },
                         color: '#ffffff',
                         textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
                         wordWrap: 'normal',
@@ -385,7 +626,7 @@ export const Hero = () => {
                         mb: { xs: 2, sm: 3, md: 4 },
                         opacity: 0.95,
                         fontWeight: 400,
-                        fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' },
+                        fontSize: { xs: '1rem', sm: '1.2rem', md: '1.25rem' },
                         lineHeight: 1.5,
                         color: 'rgba(255, 255, 255, 0.9)',
                       }}

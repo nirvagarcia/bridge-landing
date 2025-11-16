@@ -54,7 +54,6 @@ export const Vision = () => {
               gap: 2,
             }}
           >
-            <Visibility sx={{ fontSize: 48, color: 'white' }} />
             <Typography
               variant="h2"
               sx={{
