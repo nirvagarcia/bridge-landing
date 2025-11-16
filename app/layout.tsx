@@ -1,15 +1,15 @@
 import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { cookies } from 'next/headers';
 import { generateMetadata as generateSEOMetadata } from '../utils/seo.config';
 import { ClientThemeProvider } from '../shared/components/ClientThemeProvider';
 import { APP_CONFIG } from '../utils/constants';
 import { Viewport } from 'next';
 
+export const dynamic = 'force-static';
+
 export async function generateMetadata() {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get('lang')?.value || APP_CONFIG.defaultLanguage;
+  const locale = APP_CONFIG.defaultLanguage;
   return generateSEOMetadata(locale);
 }
 
@@ -24,8 +24,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get('lang')?.value || APP_CONFIG.defaultLanguage;
+  const locale = APP_CONFIG.defaultLanguage;
   const messages = await getMessages();
 
   return (

@@ -1,7 +1,13 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 import { generateMetadata as generateSEOMetadata } from '../../utils/seo.config';
 import { ClientThemeProvider } from '../../shared/components/ClientThemeProvider';
+import { routing } from '../../i18n.routing';
+
+export function generateStaticParams() {
+  return routing.locales.map(locale => ({ locale }));
+}
 
 export async function generateMetadata({
   params,
@@ -9,7 +15,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  return generateSEOMetadata(locale);
+
+  const validLocale = routing.locales.includes(locale as any)
+    ? locale
+    : routing.defaultLocale;
+
+  return generateSEOMetadata(validLocale);
 }
 
 export default async function LocaleLayout({
@@ -20,20 +31,16 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#0B7285" />
-      </head>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <ClientThemeProvider>{children}</ClientThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <ClientThemeProvider>{children}</ClientThemeProvider>
+    </NextIntlClientProvider>
   );
 }

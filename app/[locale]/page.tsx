@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Hero,
   About,
@@ -10,6 +8,11 @@ import {
   DownloadSection,
 } from '../../modules';
 import { Navbar, Footer } from '../../shared/components';
+import { routing } from '../../i18n.routing';
+
+export function generateStaticParams() {
+  return routing.locales.map(locale => ({ locale }));
+}
 
 export default function HomePage() {
   return (
@@ -18,8 +21,8 @@ export default function HomePage() {
       <main>
         <Hero />
         <About />
-        <Impact />
         <HowItWorks />
+        <Impact />
         <Team />
         <Vision />
         <DownloadSection />

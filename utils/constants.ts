@@ -6,9 +6,10 @@ export const APP_CONFIG = {
   url: 'https://bridge.dev',
   email: 'hello@bridge.dev',
   social: {
-    github: 'https://github.com/nirvagarcia/bridge',
-    instagram: 'https://instagram.com/bridge.app',
-    linkedin: 'https://linkedin.com/company/bridge-app',
+    github: 'https://github.com/Bridge-LSP',
+    linkedin:
+      'https://www.linkedin.com/company/upc-facultad-de-ingenier%C3%ADa/',
+    instagram: 'https://www.instagram.com/upcedu/',
   },
   creators: [
     {
@@ -29,22 +30,4 @@ export const APP_CONFIG = {
   defaultLanguage: 'es' as const,
 };
 
-export const SECTIONS = {
-  HERO: 'hero',
-  ABOUT: 'about',
-  IMPACT: 'impact',
-  HOW_IT_WORKS: 'how-it-works',
-  TEAM: 'team',
-  VISION: 'vision',
-  DOWNLOAD: 'download',
-  CONTACT: 'contact',
-} as const;
-
-export const BREAKPOINTS = {
-  mobile: 360,
-  tablet: 768,
-  desktop: 1440,
-} as const;
-
 export type Language = (typeof APP_CONFIG.languages)[number];
-export type Section = (typeof SECTIONS)[keyof typeof SECTIONS];

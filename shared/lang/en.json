@@ -2,8 +2,8 @@
   "navigation": {
     "home": "Home",
     "about": "About",
-    "impact": "Impact",
     "howItWorks": "How it works",
+    "impact": "Impact",
     "team": "Team",
     "vision": "Vision",
     "download": "Download"
@@ -11,7 +11,9 @@
   "hero": {
     "title": "Translate Peruvian Sign Language into text and voice",
     "subtitle": "Breaking communication barriers between people with hearing disabilities and listeners in Peru.",
+    "downloadApp": "Download APK for Android",
     "downloadButton": "Download APK for Android",
+    "watchVideo": "Watch Demo",
     "watchDemo": "Watch Demo",
     "availableOn": "Available on"
   },
@@ -35,18 +37,31 @@
     "satisfaction": "User satisfaction",
     "testimonial": "Bridge has changed the way I communicate. Now I can express my ideas without barriers.",
     "testimonialAuthor": "Rosa, Bridge user",
-    "communityTitle": "Building community",
-    "communityText": "We work directly with the Peruvian deaf community to ensure our technology responds to their real needs."
+    "testimonialsTitle": "What our users say",
+    "testimonialsSubtitle": "Real testimonials from people who have transformed their communication with Bridge"
   },
   "howItWorks": {
     "title": "How Bridge works",
-    "subtitle": "Simple technology, powerful results",
-    "step1Title": "Capture",
-    "step1Description": "The camera detects and captures hand movements in real-time",
-    "step2Title": "Processing",
-    "step2Description": "AI analyzes gestures using models trained specifically for PSL",
-    "step3Title": "Translation",
-    "step3Description": "Text and audio are generated instantly in clear and natural Spanish",
+    "subtitle": "Discover how Bridge transforms PSL signs into fluid communication through cutting-edge technology",
+    "step1Title": "Start Bridge",
+    "step1Description": "Open the app and press \"Start translation\" to activate the camera",
+    "step1Caption": "Tap to start",
+    "step2Title": "Capture Activated",
+    "step2Description": "The camera activates and begins detecting your movements in real-time",
+    "step2Caption": "Camera active",
+    "step3Title": "Smart Detection",
+    "step3Description": "The system recognizes and tracks your PSL signs with advanced precision",
+    "step3Caption": "Recognizing signs...",
+    "step4Title": "AI Processing",
+    "step4Description": "Artificial intelligence analyzes and converts signs into coherent words",
+    "step4Caption": "Processing with AI...",
+    "step5Title": "Real-Time Text",
+    "step5Description": "Words appear instantly on your screen while you make the signs",
+    "step5Caption": "Translating live",
+    "step5Text": "Hello...",
+    "step6Title": "Voice Synthesis",
+    "step6Description": "Text is converted to natural audio for complete communication",
+    "step6Caption": "Playing audio",
     "features": "Key features",
     "realTime": "Real-time translation",
     "realTimeDesc": "Processing speed under 2 seconds",
@@ -58,13 +73,40 @@
   "team": {
     "title": "Meet the team",
     "subtitle": "Innovators committed to inclusion",
-    "nirvaRole": "AI & Software Engineer",
-    "nirvaDescription": "Software engineer passionate about creating technology that generates positive social impact.",
-    "michelleRole": "FullStack Developer",
-    "michelleDescription": "Developer focused on creating inclusive and user-centered experiences.",
+    "nirvaRole": "AI & Software Engineer | Tech Lead",
+    "nirvaDescription": "Software Engineer specialized in Generative AI and Machine Learning with +2 years building exceptional user experiences. Expert in Python, React, TypeScript, Node.js, and AI technologies like OpenAI and Ollama. Creator of end-to-end fullstack solutions that combine innovative UX/UI with robust backend architectures. Pioneer in ML model implementation for social impact applications.",
+    "michelleRole": "Fullstack Developer | Backend Specialist",
+    "michelleDescription": "Fullstack Developer with +1 year experience building robust and scalable web applications. Specialist in backend architectures with Django, MySQL databases, and frontend development with Angular. Expert in RESTful API design, database query optimization, and distributed systems implementation. Focused on creating elegant technical solutions that prioritize performance and user experience.",
+    "techStack": "Tech Stack",
+    "experience": {
+      "nirvana": "+2 years",
+      "michelle": "+1 year"
+    },
+    "highlights": {
+      "iaGenerativa": "Gen AI",
+      "machineLearning": "Machine Learning",
+      "uxUi": "UX/UI",
+      "fullstack": "Fullstack Development",
+      "backendArchitecture": "Backend Architecture",
+      "databaseDesign": "Database Design",
+      "apiDevelopment": "API Development",
+      "softwareArchitecture": "Software Architecture"
+    },
+    "techList": {
+      "python": "Python",
+      "react": "React.js",
+      "typescript": "TypeScript",
+      "nodejs": "Node.js",
+      "openai": "OpenAI",
+      "ollama": "Ollama",
+      "django": "Django",
+      "mysql": "MySQL",
+      "angular": "Angular",
+      "restfulApis": "RESTful APIs"
+    },
     "location": "Based in Lima, Peru",
     "collaboration": "Want to collaborate?",
-    "collaborationText": "We are always looking for people passionate about inclusion and technology.",
+    "collaborationText": "Are you an organization, educational institution, or company interested in collaborating? Let's work together to make a difference.",
     "joinUs": "Join us"
   },
   "vision": {
@@ -76,7 +118,6 @@
     "educationText": "Develop educational tools that facilitate PSL learning for hearing people.",
     "community": "Community strengthening",
     "communityText": "Create a support network and resources for the deaf community throughout the region.",
-    "partnership": "Interested in being part of the change?",
     "contact": "Contact us"
   },
   "download": {
@@ -111,5 +152,13 @@
     "close": "Close",
     "menu": "Menu",
     "language": "Language"
+  },
+  "notFound": {
+    "title": "404 — Page not found",
+    "message": "Sorry, we couldn't find the page you were looking for.",
+    "hint": "The route may be mistyped or the resource might no longer exist.",
+    "homeCTA": "Back to Home",
+    "contactCTA": "Contact Support",
+    "help": "If you think this is a mistake, contact us and tell us which URL you tried to open."
   }
 }

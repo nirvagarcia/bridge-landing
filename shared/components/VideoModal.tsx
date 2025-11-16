@@ -18,7 +18,6 @@ export const VideoModal: React.FC<VideoModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Close modal on escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isOpen) {
@@ -28,7 +27,6 @@ export const VideoModal: React.FC<VideoModalProps> = ({
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      // Prevent background scroll
       document.body.style.overflow = 'hidden';
     }
 
@@ -38,7 +36,6 @@ export const VideoModal: React.FC<VideoModalProps> = ({
     };
   }, [isOpen, onClose]);
 
-  // Close modal when clicking backdrop
   const handleBackdropClick = (event: React.MouseEvent) => {
     if (event.target === event.currentTarget) {
       onClose();

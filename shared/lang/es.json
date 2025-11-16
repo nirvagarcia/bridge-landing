@@ -2,8 +2,8 @@
   "navigation": {
     "home": "Inicio",
     "about": "Nosotros",
-    "impact": "Impacto",
     "howItWorks": "Cómo funciona",
+    "impact": "Impacto",
     "team": "Equipo",
     "vision": "Visión",
     "download": "Descargar"
@@ -11,7 +11,9 @@
   "hero": {
     "title": "Traduce Lengua de Señas Peruana a texto y voz",
     "subtitle": "Rompiendo barreras de comunicación entre personas con DA (Discapacidad Auditiva) y oyentes en el Perú.",
+    "downloadApp": "Descargar APK para Android",
     "downloadButton": "Descargar APK para Android",
+    "watchVideo": "Ver Demo",
     "watchDemo": "Ver Demo",
     "availableOn": "Disponible en"
   },
@@ -35,18 +37,31 @@
     "satisfaction": "Satisfacción del usuario",
     "testimonial": "Bridge cambiará nuestra manera de comunicación. Ahora podremos expresar nuestras ideas sin barreras.",
     "testimonialAuthor": "Rosa, usuaria de Bridge",
-    "communityTitle": "Construyendo comunidad",
-    "communityText": "Trabajamos directamente con la comunidad con DA en el Perú para asegurar que nuestra tecnología responda a sus necesidades reales."
+    "testimonialsTitle": "Lo que dicen nuestros usuarios",
+    "testimonialsSubtitle": "Testimonios reales de personas que han transformado su comunicación con Bridge"
   },
   "howItWorks": {
     "title": "Cómo funciona Bridge",
-    "subtitle": "Tecnología simple, resultados poderosos",
-    "step1Title": "Captura",
-    "step1Description": "La cámara detecta y captura los movimientos de las manos en tiempo real",
-    "step2Title": "Procesamiento",
-    "step2Description": "La IA analiza los gestos usando modelos entrenados específicamente para LSP",
-    "step3Title": "Traducción",
-    "step3Description": "El texto y audio se generan instantáneamente en español claro y natural",
+    "subtitle": "Descubre cómo Bridge transforma las señas LSP en comunicación fluida a través de tecnología de vanguardia",
+    "step1Title": "Iniciar Bridge",
+    "step1Description": "Abre la app y presiona \"Comenzar traducción\" para activar la cámara",
+    "step1Caption": "Toca para comenzar",
+    "step2Title": "Captura Activada",
+    "step2Description": "La cámara se activa y comienza a detectar tus movimientos en tiempo real",
+    "step2Caption": "Cámara activa",
+    "step3Title": "Detección Inteligente",
+    "step3Description": "El sistema reconoce y rastrea tus señas LSP con precisión avanzada",
+    "step3Caption": "Reconociendo señas...",
+    "step4Title": "Procesamiento IA",
+    "step4Description": "La inteligencia artificial analiza y convierte las señas en palabras coherentes",
+    "step4Caption": "Procesando con IA...",
+    "step5Title": "Texto en Tiempo Real",
+    "step5Description": "Las palabras aparecen instantáneamente en tu pantalla mientras haces las señas",
+    "step5Caption": "Traduciendo en vivo",
+    "step5Text": "Hola...",
+    "step6Title": "Síntesis de Voz",
+    "step6Description": "El texto se convierte en audio natural para comunicación completa",
+    "step6Caption": "Reproduciendo audio",
     "features": "Características principales",
     "realTime": "Traducción en tiempo real",
     "realTimeDesc": "Velocidad de procesamiento inferior a 2 segundos",
@@ -58,13 +73,38 @@
   "team": {
     "title": "Conoce al equipo",
     "subtitle": "Innovadores comprometidos con la inclusión",
-    "nirvaRole": "Ingeniera de Software & IA",
-    "nirvaDescription": "Ingeniera de software apasionada por crear tecnología que genere impacto social positivo.",
-    "michelleRole": "Desarrolladora FullStack",
-    "michelleDescription": "Desarrolladora enfocada en crear experiencias inclusivas y centradas en el usuario.",
+    "nirvaRole": "AI & Software Engineer | Tech Lead",
+    "nirvaDescription": "Ingeniera de Software especializada en IA Generativa y Machine Learning con +2 años construyendo experiencias de usuario excepcionales. Experta en Python, React, TypeScript, Node.js, y tecnologías de IA como OpenAI y Ollama. Creadora de soluciones fullstack end-to-end que combinan UX/UI innovador con arquitecturas de backend robustas. Pionera en implementación de modelos de ML para aplicaciones de impacto social.",
+    "michelleRole": "Fullstack Developer | Backend Specialist",
+    "michelleDescription": "Desarrolladora Fullstack con +1 año de experiencia construyendo aplicaciones web robustas y escalables. Especialista en arquitecturas backend con Django, bases de datos MySQL, y desarrollo frontend con Angular. Experta en diseño de APIs RESTful, optimización de consultas de base de datos, y implementación de sistemas distribuidos. Enfocada en crear soluciones técnicas elegantes que priorizan performance y experiencia de usuario.",
+    "techStack": "Tech Stack",
+    "experience": {
+      "nirvana": "+2 años",
+      "michelle": "+1 año"
+    },
+    "highlights": {
+      "iaGenerativa": "IA Gen",
+      "machineLearning": "Machine Learning",
+      "uxUi": "UX/UI",
+      "fullstack": "Desarrollo Fullstack",
+      "backendArchitecture": "Arquitectura Backend",
+      "databaseDesign": "Diseño de Base de Datos",
+      "apiDevelopment": "Desarrollo APIs",
+      "softwareArchitecture": "Arquitectura de Software"
+    },
+    "techList": {
+      "python": "Python",
+      "react": "React.js",
+      "typescript": "TypeScript",
+      "nodejs": "Node.js",
+      "django": "Django",
+      "mysql": "MySQL",
+      "angular": "Angular",
+      "restfulApis": "APIs RESTful"
+    },
     "location": "Basado en Lima, Perú",
     "collaboration": "¿Quieres colaborar?",
-    "collaborationText": "Estamos siempre buscando personas apasionadas por la inclusión y la tecnología.",
+    "collaborationText": "¿Eres una organización, institución educativa o empresa interesada en colaborar? Trabajemos juntos para hacer la diferencia.",
     "joinUs": "Únete a nosotros"
   },
   "vision": {
@@ -76,7 +116,6 @@
     "educationText": "Desarrollar herramientas educativas que faciliten el aprendizaje de LSP para personas oyentes.",
     "community": "Fortalecimiento comunitario",
     "communityText": "Crear una red de apoyo y recursos para la comunidad sorda en toda la región.",
-    "partnership": "¿Interesado en ser parte del cambio?",
     "contact": "Contáctanos"
   },
   "download": {
@@ -111,5 +150,13 @@
     "close": "Cerrar",
     "menu": "Menú",
     "language": "Idioma"
+  },
+  "notFound": {
+    "title": "404 — Página no encontrada",
+    "message": "Lo sentimos, no pudimos encontrar la página que buscabas.",
+    "hint": "Puede que la ruta esté mal escrita o que el recurso ya no exista.",
+    "homeCTA": "Volver al inicio",
+    "contactCTA": "Contactar soporte",
+    "help": "Si crees que esto es un error, contáctanos y dinos qué URL intentaste abrir."
   }
 }

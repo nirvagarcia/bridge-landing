@@ -1,25 +1,26 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   Box,
   Container,
   Typography,
   Card,
-  useTheme,
   IconButton,
+  Grid,
+  Paper,
+  Stack,
 } from '@mui/material';
 import {
   PlayArrow,
   CameraAlt,
   TextFields,
   VolumeUp,
-  Language,
-  CheckCircle,
-  ArrowForward,
   Visibility,
   SmartToy,
+  Timeline,
+  Pause,
 } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 
@@ -29,117 +30,372 @@ interface ProcessStep {
   title: string;
   description: string;
   color: string;
-  animation: string;
+  gradient: string;
+  visual: React.ReactNode;
 }
 
 export const HowItWorks = () => {
-  const theme = useTheme();
   const t = useTranslations('howItWorks');
   const [currentStep, setCurrentStep] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [progressKey, setProgressKey] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true });
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   const processSteps: ProcessStep[] = [
     {
       id: 1,
-      icon: <PlayArrow sx={{ fontSize: 40, color: 'white' }} />,
-      title: 'Ingresar a Bridge',
-      description:
-        'El usuario abre la aplicación Bridge y accede a la interfaz de traducción',
+      icon: <PlayArrow sx={{ fontSize: 40 }} />,
+      title: t('step1Title'),
+      description: t('step1Description'),
       color: '#0B7285',
-      animation: 'fadeIn',
+      gradient: 'linear-gradient(135deg, #0B7285 0%, #0E8A9F 100%)',
+      visual: (
+        <Box sx={{ textAlign: 'center', py: 3 }}>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, type: 'spring' }}
+          >
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                boxShadow: [
+                  '0 0 0 0 rgba(11, 114, 133, 0.4)',
+                  '0 0 0 20px rgba(11, 114, 133, 0)',
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              style={{
+                width: '50px',
+                height: '50px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 16px',
+                boxShadow: '0 8px 24px rgba(11, 114, 133, 0.3)',
+              }}
+            >
+              <PlayArrow sx={{ fontSize: 40, color: 'white' }} />
+            </motion.div>
+          </motion.div>
+          <Typography variant="caption" color="text.secondary">
+            {t('step1Caption')}
+          </Typography>
+        </Box>
+      ),
     },
     {
       id: 2,
-      icon: <CameraAlt sx={{ fontSize: 40, color: 'white' }} />,
-      title: 'Activar Captura',
-      description:
-        'Presiona el botón de play para iniciar la captura de gestos en tiempo real',
+      icon: <CameraAlt sx={{ fontSize: 40 }} />,
+      title: t('step2Title'),
+      description: t('step2Description'),
       color: '#66D9E8',
-      animation: 'pulse',
+      gradient: 'linear-gradient(135deg, #66D9E8 0%, #4FC3E0 100%)',
+      visual: (
+        <Box sx={{ textAlign: 'center', py: 3, position: 'relative' }}>
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <CameraAlt sx={{ fontSize: 50, color: '#66D9E8' }} />
+          </motion.div>
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ mt: 2, display: 'block' }}
+          >
+            {t('step2Caption')}
+          </Typography>
+        </Box>
+      ),
     },
     {
       id: 3,
-      icon: <Visibility sx={{ fontSize: 40, color: 'white' }} />,
-      title: 'Detección de Señas',
-      description:
-        'La cámara captura y detecta las señas LSP en tiempo real con precisión',
+      icon: <Visibility sx={{ fontSize: 40 }} />,
+      title: t('step3Title'),
+      description: t('step3Description'),
       color: '#0B7285',
-      animation: 'scan',
+      gradient: 'linear-gradient(135deg, #0B7285 0%, #0E8A9F 100%)',
+      visual: (
+        <Box sx={{ textAlign: 'center', py: 3, position: 'relative' }}>
+          <Box sx={{ position: 'relative', display: 'inline-block' }}>
+            <motion.div
+              animate={{
+                rotate: [0, 5, -5, 0],
+                scale: [1, 1.05, 1],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <Box
+                sx={{
+                  width: 80,
+                  height: 80,
+                  background:
+                    'linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%)',
+                  borderRadius: 2,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                }}
+              >
+                <Typography sx={{ fontSize: 40 }}>✋</Typography>
+                <motion.div
+                  animate={{
+                    y: [-40, 40, -40],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                  style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '2px',
+                    background:
+                      'linear-gradient(90deg, transparent, #0B7285, transparent)',
+                    top: 0,
+                  }}
+                />
+              </Box>
+            </motion.div>
+            {[1, 2, 3, 4].map((point, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  scale: [0, 1, 0],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                }}
+                style={{
+                  position: 'absolute',
+                  width: '8px',
+                  height: '8px',
+                  background: '#0B7285',
+                  borderRadius: '50%',
+                  top: `${20 + i * 15}px`,
+                  left: `${20 + i * 10}px`,
+                }}
+              />
+            ))}
+          </Box>
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ mt: 2, display: 'block' }}
+          >
+            {t('step3Caption')}
+          </Typography>
+        </Box>
+      ),
     },
     {
       id: 4,
-      icon: <SmartToy sx={{ fontSize: 40, color: 'white' }} />,
-      title: 'Análisis IA',
-      description:
-        'Los modelos de IA analizan, clasifican y limpian los gestos formando palabras y oraciones',
+      icon: <SmartToy sx={{ fontSize: 40 }} />,
+      title: t('step4Title'),
+      description: t('step4Description'),
       color: '#66D9E8',
-      animation: 'process',
+      gradient: 'linear-gradient(135deg, #66D9E8 0%, #4FC3E0 100%)',
+      visual: (
+        <Box sx={{ textAlign: 'center', py: 3 }}>
+          <Box sx={{ position: 'relative', display: 'inline-block' }}>
+            <motion.div
+              animate={{
+                rotate: [0, 360],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+            >
+              <Box
+                sx={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: '50%',
+                  background:
+                    'linear-gradient(135deg, #66D9E8 0%, #4FC3E0 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                }}
+              >
+                <SmartToy sx={{ fontSize: 40, color: 'white' }} />
+              </Box>
+            </motion.div>
+            {[1, 2, 3, 4, 5, 6].map((particle, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  scale: [0, 1, 0],
+                  x: [0, Math.cos((i * 60 * Math.PI) / 180) * 60],
+                  y: [0, Math.sin((i * 60 * Math.PI) / 180) * 60],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                  ease: 'easeOut',
+                }}
+                style={{
+                  position: 'absolute',
+                  width: '6px',
+                  height: '6px',
+                  background: '#66D9E8',
+                  borderRadius: '50%',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              />
+            ))}
+          </Box>
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ mt: 2, display: 'block' }}
+          >
+            {t('step4Caption')}
+          </Typography>
+        </Box>
+      ),
     },
     {
       id: 5,
-      icon: <TextFields sx={{ fontSize: 40, color: 'white' }} />,
-      title: 'Texto en Tiempo Real',
-      description:
-        'El usuario ve su oración traducida a texto en tiempo real en la pantalla',
+      icon: <TextFields sx={{ fontSize: 40 }} />,
+      title: t('step5Title'),
+      description: t('step5Description'),
       color: '#0B7285',
-      animation: 'typewriter',
+      gradient: 'linear-gradient(135deg, #0B7285 0%, #0E8A9F 100%)',
+      visual: (
+        <Box sx={{ textAlign: 'center', py: 3 }}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              mx: 'auto',
+              maxWidth: 200,
+              background: 'linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%)',
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Typography
+                variant="h6"
+                sx={{
+                  fontFamily: 'monospace',
+                  color: '#0B7285',
+                  borderRight: '2px solid #0B7285',
+                  pr: 1,
+                  animation: 'blink 1s infinite',
+                  '@keyframes blink': {
+                    '0%, 50%': { borderColor: '#0B7285' },
+                    '51%, 100%': { borderColor: 'transparent' },
+                  },
+                }}
+              >
+                {t('step5Text')}
+              </Typography>
+            </motion.div>
+          </Paper>
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ mt: 2, display: 'block' }}
+          >
+            {t('step5Caption')}
+          </Typography>
+        </Box>
+      ),
     },
     {
       id: 6,
-      icon: <VolumeUp sx={{ fontSize: 40, color: 'white' }} />,
-      title: 'Audio TTS',
-      description:
-        'La oración generada se reproduce en audio usando síntesis de voz en tiempo real',
+      icon: <VolumeUp sx={{ fontSize: 40 }} />,
+      title: t('step6Title'),
+      description: t('step6Description'),
       color: '#66D9E8',
-      animation: 'soundWave',
-    },
-    {
-      id: 7,
-      icon: <Language sx={{ fontSize: 40, color: 'white' }} />,
-      title: 'Traducción Multiidioma',
-      description:
-        'Opcionalmente, traduce a otros idiomas (inglés, portugués) con audio en el idioma seleccionado',
-      color: '#0B7285',
-      animation: 'translate',
+      gradient: 'linear-gradient(135deg, #66D9E8 0%, #4FC3E0 100%)',
+      visual: (
+        <Box
+          sx={{
+            textAlign: 'center',
+            py: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+            }}
+            transition={{ duration: 1, repeat: Infinity }}
+          >
+            <Box
+              sx={{
+                width: 80,
+                height: 80,
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #66D9E8 0%, #4FC3E0 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <VolumeUp sx={{ fontSize: 40, color: 'white' }} />
+            </Box>
+          </motion.div>
+          <Typography variant="caption" color="text.secondary" sx={{ mt: 2 }}>
+            {t('step6Caption')}
+          </Typography>
+        </Box>
+      ),
     },
   ];
 
+  useEffect(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+
+    if (!autoPlay || !isInView || !isPlaying) return;
+
+    timerRef.current = setInterval(() => {
+      setCurrentStep(prev => (prev + 1) % processSteps.length);
+    }, 4000);
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [autoPlay, isInView, isPlaying, processSteps.length, progressKey]);
+
   const handleStepClick = (stepIndex: number) => {
     setCurrentStep(stepIndex);
+    setIsPlaying(false);
+    setProgressKey(prev => prev + 1);
   };
 
-  const getStepAnimation = (animation: string): any => {
-    switch (animation) {
-      case 'pulse':
-        return {
-          scale: [1, 1.05, 1],
-          transition: { duration: 1, repeat: Infinity },
-        };
-      case 'scan':
-        return {
-          boxShadow: [
-            '0 0 0 0 rgba(11, 114, 133, 0.7)',
-            '0 0 0 20px rgba(11, 114, 133, 0)',
-          ],
-          transition: { duration: 1.5, repeat: Infinity },
-        };
-      case 'process':
-        return {
-          rotate: [0, 360],
-          transition: {
-            duration: 2,
-            repeat: Infinity,
-            ease: 'linear',
-          },
-        };
-      case 'soundWave':
-        return {
-          scaleY: [1, 1.2, 0.8, 1.1, 1],
-          transition: { duration: 1.5, repeat: Infinity },
-        };
-      default:
-        return {};
+  const toggleAutoPlay = () => {
+    const newPlayingState = !isPlaying;
+    setIsPlaying(newPlayingState);
+    setProgressKey(prev => prev + 1);
+    if (newPlayingState) {
+      setAutoPlay(true);
     }
   };
 
@@ -148,8 +404,9 @@ export const HowItWorks = () => {
       id="how-it-works"
       ref={sectionRef}
       sx={{
-        py: 10,
-        background: 'linear-gradient(180deg, #fafafa 0%, #e8f4f8 100%)',
+        py: 12,
+        background:
+          'linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #e8f4f8 100%)',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -157,354 +414,296 @@ export const HowItWorks = () => {
       <Box
         sx={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          opacity: 0.05,
-          backgroundImage: `radial-gradient(circle at 25% 25%, #0B7285 0%, transparent 50%),
-                           radial-gradient(circle at 75% 75%, #66D9E8 0%, transparent 50%)`,
+          top: '10%',
+          left: '-5%',
+          width: '200px',
+          height: '200px',
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, rgba(102, 217, 232, 0.1) 0%, transparent 70%)',
+          animation: 'float 6s ease-in-out infinite',
+          '@keyframes float': {
+            '0%, 100%': { transform: 'translateY(0px)' },
+            '50%': { transform: 'translateY(-20px)' },
+          },
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '10%',
+          right: '-5%',
+          width: '300px',
+          height: '300px',
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, rgba(11, 114, 133, 0.08) 0%, transparent 70%)',
+          animation: 'float 8s ease-in-out infinite reverse',
         }}
       />
 
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
-          <Box sx={{ textAlign: 'center', mb: 8 }}>
-            <Typography
-              variant="h2"
+          <Box sx={{ textAlign: 'center', mb: 10 }}>
+            <Box
               sx={{
-                fontWeight: 'bold',
-                mb: 2,
-                background: 'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mb: 3,
               }}
             >
-              {t('title')}
-            </Typography>
+              <Timeline sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
+              <Typography
+                variant="h2"
+                sx={{
+                  fontWeight: 800,
+                  background:
+                    'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {t('title')}
+              </Typography>
+            </Box>
             <Typography
               variant="h5"
               sx={{
-                mb: 4,
                 color: 'text.secondary',
                 fontWeight: 400,
-                maxWidth: 700,
+                fontSize: '1.25rem',
+                maxWidth: 800,
                 mx: 'auto',
+                lineHeight: 1.6,
               }}
             >
-              Descubre cómo Bridge transforma las señas LSP en comunicación
-              fluida paso a paso
+              {t('subtitle')}
             </Typography>
           </Box>
         </motion.div>
 
-        <Box sx={{ mb: 8 }}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              mb: 6,
-              flexWrap: 'wrap',
-              gap: 1,
-            }}
-          >
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <IconButton
-                  onClick={() => handleStepClick(index)}
-                  sx={{
-                    width: 60,
-                    height: 60,
-                    backgroundColor:
-                      index === currentStep
-                        ? step.color
-                        : 'rgba(11, 114, 133, 0.1)',
-                    color: index === currentStep ? 'white' : 'text.secondary',
-                    m: 0.5,
-                    border: index === currentStep ? '3px solid' : '2px solid',
-                    borderColor:
-                      index === currentStep ? 'white' : 'transparent',
-                    boxShadow:
-                      index === currentStep
-                        ? `0 8px 25px ${step.color}40`
-                        : 'none',
-                    transition: 'all 0.3s ease',
-                    position: 'relative',
-                    '&:hover': {
-                      backgroundColor: step.color,
-                      color: 'white',
-                    },
-                  }}
-                >
-                  <Box sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-                    {step.id}
-                  </Box>
-                </IconButton>
-              </motion.div>
-            ))}
-          </Box>
-
-          {/* Current Step Display */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentStep}
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ duration: 0.4, type: 'spring' }}
-            >
-              <Card
-                sx={{
-                  maxWidth: 800,
-                  mx: 'auto',
-                  p: 6,
-                  background:
-                    'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.9) 100%)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: 4,
-                  border: '2px solid',
-                  borderColor: `${processSteps[currentStep].color}30`,
-                  boxShadow: `0 20px 60px ${processSteps[currentStep].color}20`,
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-                  <motion.div
-                    animate={getStepAnimation(
-                      processSteps[currentStep].animation
-                    )}
-                  >
-                    <Box
-                      sx={{
-                        width: 80,
-                        height: 80,
-                        borderRadius: '50%',
-                        backgroundColor: processSteps[currentStep].color,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        mr: 3,
-                        boxShadow: `0 8px 25px ${processSteps[currentStep].color}40`,
-                      }}
-                    >
-                      {processSteps[currentStep].icon}
-                    </Box>
-                  </motion.div>
-
-                  <Box>
-                    <Typography
-                      variant="h4"
-                      sx={{
-                        fontWeight: 'bold',
-                        color: processSteps[currentStep].color,
-                        mb: 1,
-                      }}
-                    >
-                      Paso {processSteps[currentStep].id}:{' '}
-                      {processSteps[currentStep].title}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: 'text.secondary',
-                        fontSize: '1.1rem',
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {processSteps[currentStep].description}
-                    </Typography>
-                  </Box>
-                </Box>
-
-                {/* Visual representation area */}
-                <Box
-                  sx={{
-                    height: 200,
-                    backgroundColor: 'rgba(11, 114, 133, 0.05)',
-                    borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
-                >
-                  {/* Animated visual elements based on current step */}
-                  {currentStep === 0 && (
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <Box sx={{ textAlign: 'center' }}>
-                        <PlayArrow
-                          sx={{ fontSize: 80, color: 'primary.main', mb: 2 }}
-                        />
-                        <Typography variant="h6" color="primary">
-                          Bienvenido a Bridge
-                        </Typography>
-                      </Box>
-                    </motion.div>
-                  )}
-
-                  {currentStep === 1 && (
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{
-                        duration: 1,
-                        repeat: Infinity,
-                      }}
-                    >
-                      <CameraAlt sx={{ fontSize: 80, color: 'primary.main' }} />
-                    </motion.div>
-                  )}
-
-                  {currentStep === 2 && (
-                    <Box sx={{ position: 'relative' }}>
-                      <motion.div
-                        animate={{
-                          boxShadow: [
-                            '0 0 0 0 rgba(11, 114, 133, 0.7)',
-                            '0 0 0 40px rgba(11, 114, 133, 0)',
-                          ],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                        }}
-                      >
-                        <Visibility
-                          sx={{ fontSize: 80, color: 'primary.main' }}
-                        />
-                      </motion.div>
-                    </Box>
-                  )}
-
-                  {currentStep === 3 && (
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: 'linear',
-                      }}
-                    >
-                      <SmartToy sx={{ fontSize: 80, color: 'primary.main' }} />
-                    </motion.div>
-                  )}
-
-                  {currentStep === 4 && (
-                    <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 }}
-                      >
-                        <Typography
-                          variant="h6"
-                          sx={{
-                            fontFamily: 'monospace',
-                            backgroundColor: 'rgba(11, 114, 133, 0.1)',
-                            p: 2,
-                            borderRadius: 1,
-                          }}
-                        >
-                          "Hola, ¿cómo estás?"
-                        </Typography>
-                      </motion.div>
-                    </Box>
-                  )}
-
-                  {currentStep === 5 && (
-                    <motion.div
-                      animate={{ scaleY: [1, 1.5, 0.5, 1.2, 1] }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                      }}
-                    >
-                      <VolumeUp sx={{ fontSize: 80, color: 'primary.main' }} />
-                    </motion.div>
-                  )}
-
-                  {currentStep === 6 && (
-                    <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
-                      <motion.div
-                        animate={{ x: [0, 20, 0] }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                        }}
-                      >
-                        <Language
-                          sx={{ fontSize: 60, color: 'primary.main' }}
-                        />
-                      </motion.div>
-                      <ArrowForward
-                        sx={{ fontSize: 40, color: 'text.secondary' }}
-                      />
-                      <Box sx={{ textAlign: 'center' }}>
-                        <Typography variant="body2" color="text.secondary">
-                          EN
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          PT
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          FR
-                        </Typography>
-                      </Box>
-                    </Box>
-                  )}
-                </Box>
-              </Card>
-            </motion.div>
-          </AnimatePresence>
-        </Box>
-
-        {/* Key Features Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <Box sx={{ textAlign: 'center', mt: 10 }}>
+        <Grid container spacing={4} alignItems="stretch">
+          <Grid item xs={12} md={8} order={{ xs: 1, md: 2 }}>
             <Card
               sx={{
-                p: 6,
-                background: 'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
-                color: 'white',
+                height: '650px',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: 4,
-                maxWidth: 800,
-                mx: 'auto',
+                overflow: 'visible',
+                boxShadow: '0 20px 60px rgba(11, 114, 133, 0.1)',
+                border: '1px solid rgba(11, 114, 133, 0.1)',
+                position: 'relative',
               }}
             >
-              <CheckCircle sx={{ fontSize: 60, mb: 3 }} />
-              <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>
-                Todo en Tiempo Real
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{ fontSize: '1.1rem', lineHeight: 1.6, opacity: 0.95 }}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: -8,
+                  right: -8,
+                  zIndex: 10,
+                }}
               >
-                Bridge procesa las señas LSP y genera texto y audio
-                instantáneamente, creando una experiencia de comunicación fluida
-                y natural que rompe todas las barreras.
-              </Typography>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <IconButton
+                    onClick={toggleAutoPlay}
+                    sx={{
+                      background:
+                        'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                      color: 'white',
+                      '&:hover': {
+                        background:
+                          'linear-gradient(135deg, #0A6B7A 0%, #5BC7DB 100%)',
+                      },
+                      width: 52,
+                      height: 52,
+                      boxShadow: '0 4px 16px rgba(11, 114, 133, 0.4)',
+                      border: '3px solid white',
+                    }}
+                  >
+                    {isPlaying ? (
+                      <Pause sx={{ fontSize: 24 }} />
+                    ) : (
+                      <PlayArrow sx={{ fontSize: 24 }} />
+                    )}
+                  </IconButton>
+                </motion.div>
+              </Box>
+
+              <Box
+                sx={{
+                  p: 3,
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                <Box
+                  sx={{
+                    mb: 4,
+                    p: 2,
+                    borderRadius: 2,
+                    background:
+                      'linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%)',
+                    border: '1px solid rgba(11, 114, 133, 0.1)',
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontWeight: 700,
+                      color: processSteps[currentStep].color,
+                      mb: 1,
+                    }}
+                  >
+                    Paso {processSteps[currentStep].id}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      color: 'text.primary',
+                      fontWeight: 600,
+                      mb: 2,
+                    }}
+                  >
+                    {processSteps[currentStep].title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: 'text.secondary',
+                      maxWidth: 450,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {processSteps[currentStep].description}
+                  </Typography>
+                </Box>
+
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentStep}
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                    transition={{ duration: 0.5, type: 'spring' }}
+                  >
+                    {processSteps[currentStep].visual}
+                  </motion.div>
+                </AnimatePresence>
+              </Box>
             </Card>
-          </Box>
-        </motion.div>
+          </Grid>
+
+          <Grid item xs={12} md={4} order={{ xs: 2, md: 1 }}>
+            <Box sx={{ height: { md: '650px' } }}>
+              <Stack
+                spacing={2}
+                sx={{ height: '100%', justifyContent: 'center' }}
+              >
+                {processSteps.map((step, index) => (
+                  <motion.div
+                    key={step.id}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Card
+                      onClick={() => handleStepClick(index)}
+                      sx={{
+                        p: 2.5,
+                        cursor: 'pointer',
+                        background:
+                          index === currentStep
+                            ? step.gradient
+                            : 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+                        color: index === currentStep ? 'white' : 'inherit',
+                        border: '2px solid',
+                        borderColor:
+                          index === currentStep ? step.color : 'transparent',
+                        boxShadow:
+                          index === currentStep
+                            ? `0 8px 32px ${step.color}30`
+                            : '0 2px 8px rgba(0,0,0,0.1)',
+                        transition: 'all 0.3s ease',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        '&:hover': {
+                          borderColor: step.color,
+                          boxShadow: `0 8px 32px ${step.color}20`,
+                        },
+                      }}
+                    >
+                      <Box
+                        sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
+                      >
+                        <Box
+                          sx={{
+                            width: 50,
+                            height: 50,
+                            borderRadius: '50%',
+                            background:
+                              index === currentStep
+                                ? 'rgba(255, 255, 255, 0.2)'
+                                : step.gradient,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            mr: 3,
+                            color: index === currentStep ? 'white' : 'white',
+                          }}
+                        >
+                          {React.cloneElement(step.icon as React.ReactElement, {
+                            sx: { fontSize: 28 },
+                          })}
+                        </Box>
+                        <Box>
+                          <Typography
+                            variant="subtitle1"
+                            sx={{
+                              fontWeight: 600,
+                              fontSize: '1rem',
+                            }}
+                          >
+                            {step.title}
+                          </Typography>
+                        </Box>
+                      </Box>
+
+                      {index === currentStep && (
+                        <motion.div
+                          key={`progress-${progressKey}`}
+                          initial={{ width: 0 }}
+                          animate={{ width: '100%' }}
+                          transition={{
+                            duration: autoPlay && isPlaying ? 4 : 0,
+                          }}
+                          style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            height: '3px',
+                            background: 'rgba(255, 255, 255, 0.5)',
+                          }}
+                        />
+                      )}
+                    </Card>
+                  </motion.div>
+                ))}
+              </Stack>
+            </Box>
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   );

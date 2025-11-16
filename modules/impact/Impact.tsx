@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Box,
   Container,
@@ -10,7 +10,6 @@ import {
   Card,
   CardContent,
   Avatar,
-  IconButton,
   useTheme,
 } from '@mui/material';
 import {
@@ -19,9 +18,8 @@ import {
   Speed,
   ThumbUp,
   FormatQuote,
-  ArrowBackIos,
-  ArrowForwardIos,
   Star,
+  TrendingUp,
 } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 
@@ -36,7 +34,6 @@ interface Testimonial {
 export const Impact = () => {
   const theme = useTheme();
   const t = useTranslations('impact');
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [animatedValues, setAnimatedValues] = useState([0, 0, 0, 0]);
 
   const testimonials: Testimonial[] = [
@@ -105,15 +102,6 @@ export const Impact = () => {
     },
   ];
 
-  // Auto-rotate testimonials
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
-
-  // Animate numbers on component mount
   useEffect(() => {
     const timers = metrics.map((metric, index) => {
       return setTimeout(() => {
@@ -145,21 +133,16 @@ export const Impact = () => {
     return () => timers.forEach(timer => clearTimeout(timer));
   }, []);
 
-  const nextTestimonial = () => {
-    setCurrentTestimonial(prev => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentTestimonial(
-      prev => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
-
   return (
     <Box
+      id="impact"
       sx={{
         py: 10,
         background: 'linear-gradient(180deg, #fafafa 0%, #f0f9ff 100%)',
+        '@keyframes spin': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       }}
     >
       <Container maxWidth="xl">
@@ -170,26 +153,36 @@ export const Impact = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <Typography
-              variant="h2"
+            <Box
               sx={{
-                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 mb: 2,
-                color: 'primary.main',
-                background: 'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
+                gap: 2,
               }}
             >
-              {t('title')}
-            </Typography>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontWeight: 800,
+                  background:
+                    'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {t('title')}
+              </Typography>
+            </Box>
             <Typography
               variant="h5"
               sx={{
                 mb: 3,
                 color: 'text.secondary',
                 fontWeight: 400,
+                fontSize: '1.25rem',
                 maxWidth: 600,
                 mx: 'auto',
               }}
@@ -199,93 +192,422 @@ export const Impact = () => {
           </motion.div>
         </Box>
 
-        <Grid container spacing={4} sx={{ mb: 10 }}>
-          {metrics.map((metric, index) => (
-            <Grid item xs={6} md={3} key={index}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -8 }}
+        <Box
+          sx={{
+            position: 'relative',
+            mb: 10,
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background:
+                'radial-gradient(ellipse at center, rgba(11, 114, 133, 0.03) 0%, transparent 70%)',
+              borderRadius: '24px',
+              zIndex: 0,
+            },
+          }}
+        >
+          <Box sx={{ position: 'relative', zIndex: 1 }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Card
+                sx={{
+                  p: { xs: 4, md: 6 },
+                  mb: 4,
+                  background:
+                    'linear-gradient(135deg, rgba(11, 114, 133, 0.08) 0%, rgba(102, 217, 232, 0.08) 100%), rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(11, 114, 133, 0.15)',
+                  borderRadius: '32px',
+                  boxShadow:
+                    '0 16px 48px rgba(11, 114, 133, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset',
+                  textAlign: 'center',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: '6px',
+                    background:
+                      'linear-gradient(90deg, #0B7285, #66D9E8, #0B7285)',
+                  },
+                }}
               >
-                <Card
+                <Box
                   sx={{
-                    textAlign: 'center',
-                    p: 3,
-                    height: '100%',
-                    background: `linear-gradient(135deg, ${metric.color}10 0%, ${metric.color}05 100%)`,
-                    border: `2px solid ${metric.color}20`,
-                    borderRadius: 3,
-                    transition: 'all 0.3s ease',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    '&::before': {
-                      content: '""',
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: '4px',
-                      background: `linear-gradient(90deg, ${metric.color} 0%, ${metric.color}80 100%)`,
-                    },
-                    '&:hover': {
-                      boxShadow: `0 12px 40px ${metric.color}25`,
-                      transform: 'translateY(-4px)',
-                    },
+                    display: 'flex',
+                    flexDirection: { xs: 'column', md: 'row' },
+                    alignItems: 'center',
+                    gap: 4,
                   }}
                 >
-                  <CardContent>
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                    >
-                      <Avatar
-                        sx={{
-                          backgroundColor: metric.color,
-                          width: 70,
-                          height: 70,
-                          mx: 'auto',
-                          mb: 3,
-                          boxShadow: `0 8px 24px ${metric.color}40`,
-                        }}
-                      >
-                        {metric.icon}
-                      </Avatar>
-                    </motion.div>
-
+                  <Box
+                    sx={{ flex: 1, textAlign: { xs: 'center', md: 'left' } }}
+                  >
                     <Typography
-                      variant="h3"
+                      variant="h1"
                       sx={{
-                        fontWeight: 'bold',
-                        color: metric.color,
+                        fontWeight: 900,
+                        fontSize: { xs: '4rem', md: '6rem' },
+                        background:
+                          'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        lineHeight: 0.9,
                         mb: 1,
-                        fontSize: { xs: '2rem', md: '2.5rem' },
                       }}
                     >
-                      {animatedValues[index]}
-                      {metric.suffix}
+                      {animatedValues[1]}
+                      {metrics[1].suffix}
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        color: 'text.primary',
+                        fontWeight: 600,
+                        mb: 2,
+                      }}
+                    >
+                      {metrics[1].label}
                     </Typography>
                     <Typography
                       variant="body1"
                       sx={{
                         color: 'text.secondary',
-                        fontWeight: 600,
-                        textTransform: 'uppercase',
-                        fontSize: '0.875rem',
-                        letterSpacing: 1,
+                        fontSize: '18px',
+                        lineHeight: 1.6,
+                        maxWidth: '400px',
+                        mx: { xs: 'auto', md: 0 },
                       }}
                     >
-                      {metric.label}
+                      Cada traducción representa un momento de conexión y
+                      comprensión en nuestra comunidad.
                     </Typography>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      flex: { xs: 'none', md: 1 },
+                      display: 'flex',
+                      justifyContent: 'center',
+                      position: 'relative',
+                      height: { xs: 200, md: 280 },
+                      width: '100%',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        opacity: 0.1,
+                        background: `
+                          radial-gradient(circle at 20% 20%, #0B7285 2px, transparent 2px),
+                          radial-gradient(circle at 60% 40%, #66D9E8 1px, transparent 1px),
+                          radial-gradient(circle at 80% 70%, #0B7285 1.5px, transparent 1.5px),
+                          radial-gradient(circle at 30% 80%, #66D9E8 2px, transparent 2px)
+                        `,
+                        backgroundSize:
+                          '50px 50px, 30px 30px, 40px 40px, 60px 60px',
+                      }}
+                    />
+
+                    <Box
+                      sx={{
+                        position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '100%',
+                        height: '100%',
+                      }}
+                    >
+                      {[
+                        { icon: <People />, top: '15%', left: '15%', delay: 0 },
+                        {
+                          icon: <Translate />,
+                          top: '20%',
+                          right: '20%',
+                          delay: 0.5,
+                        },
+                        {
+                          icon: <FormatQuote />,
+                          bottom: '25%',
+                          left: '10%',
+                          delay: 1,
+                        },
+                        {
+                          icon: <ThumbUp />,
+                          bottom: '20%',
+                          right: '15%',
+                          delay: 1.5,
+                        },
+                        { icon: <Star />, top: '45%', left: '5%', delay: 2 },
+                        {
+                          icon: <TrendingUp />,
+                          top: '40%',
+                          right: '8%',
+                          delay: 2.5,
+                        },
+                      ].map((item, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{
+                            opacity: [0.3, 0.7, 0.3],
+                            scale: [0.8, 1.2, 0.8],
+                            y: [-5, 5, -5],
+                          }}
+                          transition={{
+                            duration: 3,
+                            delay: item.delay,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                          }}
+                          style={{
+                            position: 'absolute',
+                            ...item,
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              width: { xs: 32, md: 40 },
+                              height: { xs: 32, md: 40 },
+                              borderRadius: '50%',
+                              background:
+                                'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              color: 'white',
+                              boxShadow: '0 4px 12px rgba(11, 114, 133, 0.3)',
+                              fontSize: { xs: 16, md: 20 },
+                            }}
+                          >
+                            {item.icon}
+                          </Box>
+                        </motion.div>
+                      ))}
+
+                      <motion.div
+                        animate={{
+                          rotate: [0, 10, -10, 0],
+                          scale: [1, 1.1, 1],
+                        }}
+                        transition={{
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            width: { xs: 100, md: 140 },
+                            height: { xs: 100, md: 140 },
+                            borderRadius: '50%',
+                            background:
+                              'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            boxShadow: '0 16px 32px rgba(11, 114, 133, 0.4)',
+                            position: 'relative',
+                            zIndex: 2,
+                            '&::before': {
+                              content: '""',
+                              position: 'absolute',
+                              top: -12,
+                              left: -12,
+                              right: -12,
+                              bottom: -12,
+                              borderRadius: '50%',
+                              background:
+                                'conic-gradient(#0B7285, #66D9E8, #0B7285, #66D9E8)',
+                              opacity: 0.3,
+                              animation: 'spin 12s linear infinite',
+                            },
+                            '&::after': {
+                              content: '""',
+                              position: 'absolute',
+                              top: -6,
+                              left: -6,
+                              right: -6,
+                              bottom: -6,
+                              borderRadius: '50%',
+                              background:
+                                'linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%)',
+                              animation: 'spin 8s linear infinite reverse',
+                            },
+                          }}
+                        >
+                          <Translate
+                            sx={{
+                              fontSize: { xs: 40, md: 60 },
+                              color: 'white',
+                              zIndex: 1,
+                            }}
+                          />
+                        </Box>
+                      </motion.div>
+
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          '&::before': {
+                            content: '""',
+                            position: 'absolute',
+                            top: '30%',
+                            left: '20%',
+                            width: '25%',
+                            height: '1px',
+                            background:
+                              'linear-gradient(90deg, transparent, #66D9E8, transparent)',
+                            transform: 'rotate(45deg)',
+                          },
+                          '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            bottom: '30%',
+                            right: '20%',
+                            width: '25%',
+                            height: '1px',
+                            background:
+                              'linear-gradient(90deg, transparent, #0B7285, transparent)',
+                            transform: 'rotate(-45deg)',
+                          },
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              </Card>
+            </motion.div>
+
+            <Grid container spacing={3}>
+              {[metrics[0], metrics[2], metrics[3]].map(
+                (metric, actualIndex) => {
+                  const index = actualIndex === 0 ? 0 : actualIndex + 1;
+                  return (
+                    <Grid item xs={12} md={4} key={actualIndex}>
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: actualIndex * 0.1 }}
+                        viewport={{ once: true }}
+                      >
+                        <Card
+                          sx={{
+                            p: 4,
+                            height: '100%',
+                            background: 'rgba(255, 255, 255, 0.9)',
+                            backdropFilter: 'blur(10px)',
+                            border: '1px solid rgba(11, 114, 133, 0.1)',
+                            borderRadius: '20px',
+                            boxShadow: '0 8px 24px rgba(11, 114, 133, 0.08)',
+                            textAlign: 'center',
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            position: 'relative',
+                            overflow: 'hidden',
+                            '&:hover': {
+                              transform: 'translateY(-8px)',
+                              boxShadow: '0 16px 32px rgba(11, 114, 133, 0.15)',
+                              border: '1px solid rgba(11, 114, 133, 0.2)',
+                            },
+                            '&::before': {
+                              content: '""',
+                              position: 'absolute',
+                              top: 0,
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              width: '60%',
+                              height: '3px',
+                              background: `linear-gradient(90deg, transparent, ${metric.color}, transparent)`,
+                              borderRadius: '0 0 6px 6px',
+                            },
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              width: 64,
+                              height: 64,
+                              borderRadius: '16px',
+                              background: `linear-gradient(135deg, ${metric.color}15, ${metric.color}25)`,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              mx: 'auto',
+                              mb: 3,
+                              color: metric.color,
+                            }}
+                          >
+                            {metric.icon}
+                          </Box>
+
+                          <Typography
+                            variant="h3"
+                            sx={{
+                              fontWeight: 800,
+                              color: metric.color,
+                              mb: 1,
+                              fontSize: { xs: '2rem', md: '2.5rem' },
+                            }}
+                          >
+                            {animatedValues[index]}
+                            {metric.suffix}
+                          </Typography>
+
+                          <Typography
+                            variant="subtitle1"
+                            sx={{
+                              color: 'text.primary',
+                              fontWeight: 600,
+                              mb: 1,
+                            }}
+                          >
+                            {metric.label}
+                          </Typography>
+
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              color: 'text.secondary',
+                              fontSize: '14px',
+                              lineHeight: 1.5,
+                            }}
+                          >
+                            {actualIndex === 0 &&
+                              'Usuarios activos en nuestra plataforma'}
+                            {actualIndex === 1 &&
+                              'De precisión en nuestras traducciones'}
+                            {actualIndex === 2 &&
+                              'De usuarios satisfechos con Bridge'}
+                          </Typography>
+                        </Card>
+                      </motion.div>
+                    </Grid>
+                  );
+                }
+              )}
             </Grid>
-          ))}
-        </Grid>
+          </Box>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -293,17 +615,30 @@ export const Impact = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <Typography
-              variant="h4"
+          <Box sx={{ textAlign: 'center', mb: 8 }}>
+            <Box
               sx={{
-                fontWeight: 'bold',
-                color: 'primary.main',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 mb: 2,
+                gap: 2,
               }}
             >
-              Lo que dicen nuestros usuarios
-            </Typography>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontWeight: 800,
+                  background:
+                    'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {t('testimonialsTitle')}
+              </Typography>
+            </Box>
             <Typography
               variant="body1"
               sx={{
@@ -312,211 +647,178 @@ export const Impact = () => {
                 mx: 'auto',
               }}
             >
-              Testimonios reales de personas que han transformado su
-              comunicación con Bridge
+              {t('testimonialsSubtitle')}
             </Typography>
           </Box>
 
-          <Box sx={{ position: 'relative', maxWidth: 800, mx: 'auto' }}>
-            <Card
-              sx={{
-                p: 6,
-                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-                boxShadow: '0 20px 60px rgba(11, 114, 133, 0.1)',
-                borderRadius: 4,
-                border: '1px solid rgba(11, 114, 133, 0.1)',
-                position: 'relative',
-                minHeight: 300,
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              overflow: 'hidden',
+              py: 4,
+              '&::before, &::after': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                width: { xs: '60px', md: '120px' },
+                zIndex: 2,
+                pointerEvents: 'none',
+              },
+              '&::before': {
+                left: 0,
+                background:
+                  'linear-gradient(90deg, #fafafa 0%, transparent 100%)',
+              },
+              '&::after': {
+                right: 0,
+                background:
+                  'linear-gradient(270deg, #fafafa 0%, transparent 100%)',
+              },
+            }}
+          >
+            <motion.div
+              animate={{
+                x: ['0%', '-50%'],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+              style={{
+                display: 'flex',
+                gap: '24px',
+                marginBottom: '24px',
               }}
             >
-              <FormatQuote
-                sx={{
-                  position: 'absolute',
-                  top: 20,
-                  left: 20,
-                  fontSize: 40,
-                  color: 'primary.main',
-                  opacity: 0.3,
-                }}
-              />
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentTestimonial}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.5 }}
-                  style={{ textAlign: 'center' }}
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <Card
+                  key={`row1-${index}`}
+                  sx={{
+                    minWidth: { xs: '280px', md: '320px' },
+                    maxWidth: { xs: '280px', md: '320px' },
+                    p: 3,
+                    background: 'rgba(255, 255, 255, 0.9)',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(11, 114, 133, 0.1)',
+                    borderRadius: '12px',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                    position: 'relative',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 8px 30px rgba(11, 114, 133, 0.15)',
+                      transition: 'all 0.3s ease',
+                    },
+                  }}
                 >
-                  <Avatar
-                    src={testimonials[currentTestimonial].avatar}
+                  <Box
                     sx={{
-                      width: 80,
-                      height: 80,
-                      mx: 'auto',
-                      mb: 3,
-                      border: '4px solid',
-                      borderColor: 'primary.light',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 2,
+                      mb: 2,
                     }}
-                  />
-
-                  <Box sx={{ mb: 2 }}>
-                    {[...Array(testimonials[currentTestimonial].rating)].map(
-                      (_, i) => (
-                        <Star key={i} sx={{ color: '#FFD700', fontSize: 24 }} />
-                      )
-                    )}
+                  >
+                    <Avatar
+                      src={testimonial.avatar}
+                      sx={{
+                        width: 48,
+                        height: 48,
+                        border: '2px solid rgba(11, 114, 133, 0.2)',
+                      }}
+                    />
+                    <Box sx={{ flex: 1 }}>
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          fontWeight: 600,
+                          color: 'text.primary',
+                          fontSize: '14px',
+                        }}
+                      >
+                        {testimonial.author}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: 'text.secondary',
+                          fontSize: '12px',
+                          display: 'block',
+                        }}
+                      >
+                        {testimonial.role}
+                      </Typography>
+                      <Box sx={{ display: 'flex', gap: 0.5, mt: 0.5 }}>
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star
+                            key={i}
+                            sx={{
+                              color: '#0B7285',
+                              fontSize: 14,
+                            }}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
                   </Box>
 
                   <Typography
-                    variant="h6"
-                    sx={{
-                      fontStyle: 'italic',
-                      mb: 3,
-                      color: 'text.primary',
-                      lineHeight: 1.6,
-                      fontSize: { xs: '1.1rem', md: '1.25rem' },
-                      minHeight: 80,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    "{testimonials[currentTestimonial].quote}"
-                  </Typography>
-
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 'bold',
-                      color: 'primary.main',
-                      mb: 0.5,
-                    }}
-                  >
-                    {testimonials[currentTestimonial].author}
-                  </Typography>
-                  <Typography
                     variant="body2"
                     sx={{
-                      color: 'text.secondary',
-                      fontWeight: 500,
+                      color: 'text.primary',
+                      lineHeight: 1.5,
+                      fontSize: '14px',
                     }}
                   >
-                    {testimonials[currentTestimonial].role}
+                    "{testimonial.quote}"
                   </Typography>
-                </motion.div>
-              </AnimatePresence>
 
-              <IconButton
-                onClick={prevTestimonial}
-                sx={{
-                  position: 'absolute',
-                  left: 10,
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  backgroundColor: 'white',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                    color: 'white',
-                  },
-                }}
-              >
-                <ArrowBackIos />
-              </IconButton>
-
-              <IconButton
-                onClick={nextTestimonial}
-                sx={{
-                  position: 'absolute',
-                  right: 10,
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  backgroundColor: 'white',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                    color: 'white',
-                  },
-                }}
-              >
-                <ArrowForwardIos />
-              </IconButton>
-
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  mt: 3,
-                  gap: 1,
-                }}
-              >
-                {testimonials.map((_, index) => (
                   <Box
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
                     sx={{
-                      width: 12,
-                      height: 12,
-                      borderRadius: '50%',
-                      backgroundColor:
-                        index === currentTestimonial
-                          ? 'primary.main'
-                          : 'grey.300',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      '&:hover': {
-                        backgroundColor:
-                          index === currentTestimonial
-                            ? 'primary.dark'
-                            : 'grey.400',
-                      },
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      mt: 2,
+                      pt: 2,
+                      borderTop: '1px solid rgba(0, 0, 0, 0.05)',
                     }}
-                  />
-                ))}
-              </Box>
-            </Card>
-          </Box>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <Box sx={{ mt: 10, textAlign: 'center' }}>
-            <Card
-              sx={{
-                p: 6,
-                background: 'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
-                color: 'white',
-                borderRadius: 4,
-                maxWidth: 800,
-                mx: 'auto',
-              }}
-            >
-              <Typography
-                variant="h4"
-                sx={{
-                  fontWeight: 'bold',
-                  mb: 3,
-                }}
-              >
-                {t('communityTitle')}
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: '1.1rem',
-                  lineHeight: 1.6,
-                  opacity: 0.95,
-                }}
-              >
-                {t('communityText')}
-              </Typography>
-            </Card>
+                  >
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Box
+                        sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+                      >
+                        <ThumbUp sx={{ fontSize: 14, color: '#0B7285' }} />
+                        <Typography
+                          variant="caption"
+                          sx={{ color: 'text.secondary', fontSize: '11px' }}
+                        >
+                          {(((index + 1) * 7) % 50) + 10}
+                        </Typography>
+                      </Box>
+                      <Box
+                        sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+                      >
+                        <FormatQuote sx={{ fontSize: 14, color: '#66D9E8' }} />
+                        <Typography
+                          variant="caption"
+                          sx={{ color: 'text.secondary', fontSize: '11px' }}
+                        >
+                          {(((index + 2) * 3) % 10) + 2}
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Typography
+                      variant="caption"
+                      sx={{ color: 'text.secondary', fontSize: '10px' }}
+                    >
+                      {((index + 5) % 7) + 1}d
+                    </Typography>
+                  </Box>
+                </Card>
+              ))}
+            </motion.div>
           </Box>
         </motion.div>
       </Container>

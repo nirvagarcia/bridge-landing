@@ -1,30 +1,15 @@
-import { notFound } from 'next/navigation';
 import { getRequestConfig } from 'next-intl/server';
-import { cookies } from 'next/headers';
-import { APP_CONFIG } from './utils/constants';
+import { routing } from './i18n.routing';
 
-export default getRequestConfig(async () => {
-  // Get locale from cookie
-  const cookieStore = await cookies();
-  let locale = cookieStore.get('lang')?.value || APP_CONFIG.defaultLanguage;
+export default getRequestConfig(async ({ requestLocale }) => {
+  let locale = await requestLocale;
 
-  // Ensure locale is valid
-  if (!APP_CONFIG.languages.includes(locale as any)) {
-    locale = APP_CONFIG.defaultLanguage;
+  if (!locale || !routing.locales.includes(locale as any)) {
+    locale = routing.defaultLocale;
   }
 
-  try {
-    return {
-      locale,
-      messages: (await import(`./shared/lang/${locale}.json`)).default,
-    };
-  } catch (error) {
-    // Fallback to default locale if translation file is not found
-    return {
-      locale: APP_CONFIG.defaultLanguage,
-      messages: (
-        await import(`./shared/lang/${APP_CONFIG.defaultLanguage}.json`)
-      ).default,
-    };
-  }
+  return {
+    locale,
+    messages: (await import(`./shared/lang/${locale}.json`)).default,
+  };
 });

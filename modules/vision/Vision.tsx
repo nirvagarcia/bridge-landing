@@ -8,12 +8,7 @@ import {
   Card,
   CardContent,
 } from '@mui/material';
-import {
-  Public,
-  School,
-  Groups,
-  Email,
-} from '@mui/icons-material';
+import { Public, School, Groups, Email, Visibility } from '@mui/icons-material';
 import { useTranslations } from 'next-intl';
 import { Button } from '../../shared/components';
 import { APP_CONFIG } from '../../utils/constants';
@@ -50,22 +45,33 @@ export const Vision = () => {
     >
       <Container maxWidth="xl">
         <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography
-            variant="h2"
+          <Box
             sx={{
-              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               mb: 2,
-              color: 'white',
+              gap: 2,
             }}
           >
-            {t('title')}
-          </Typography>
+            <Visibility sx={{ fontSize: 48, color: 'white' }} />
+            <Typography
+              variant="h2"
+              sx={{
+                fontWeight: 800,
+                color: 'white',
+              }}
+            >
+              {t('title')}
+            </Typography>
+          </Box>
           <Typography
             variant="h5"
             sx={{
               mb: 3,
               opacity: 0.9,
               fontWeight: 400,
+              fontSize: '1.25rem',
             }}
           >
             {t('subtitle')}
@@ -89,9 +95,7 @@ export const Vision = () => {
                 }}
               >
                 <CardContent sx={{ p: 4, textAlign: 'center' }}>
-                  <Box sx={{ mb: 3 }}>
-                    {item.icon}
-                  </Box>
+                  <Box sx={{ mb: 3 }}>{item.icon}</Box>
                   <Typography
                     variant="h5"
                     sx={{
@@ -116,55 +120,6 @@ export const Vision = () => {
             </Grid>
           ))}
         </Grid>
-
-        <Box sx={{ textAlign: 'center' }}>
-          <Card
-            sx={{
-              maxWidth: 600,
-              mx: 'auto',
-              p: 4,
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              border: '2px solid rgba(255, 255, 255, 0.2)',
-            }}
-          >
-            <Email sx={{ fontSize: 48, color: 'white', mb: 2 }} />
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: 'bold',
-                mb: 2,
-                color: 'white',
-              }}
-            >
-              {t('partnership')}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                mb: 3,
-                opacity: 0.9,
-                lineHeight: 1.6,
-              }}
-            >
-              ¿Eres una organización, institución educativa o empresa interesada en colaborar? Trabajemos juntos para hacer la diferencia.
-            </Typography>
-            <Button
-              variant="contained"
-              size="large"
-              href={`mailto:${APP_CONFIG.email}?subject=Colaboración con Bridge`}
-              sx={{
-                backgroundColor: 'white',
-                color: 'primary.main',
-                '&:hover': {
-                  backgroundColor: 'grey.100',
-                },
-              }}
-            >
-              {t('contact')}
-            </Button>
-          </Card>
-        </Box>
       </Container>
     </Box>
   );

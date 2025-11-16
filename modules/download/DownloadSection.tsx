@@ -51,28 +51,39 @@ export const DownloadSection = () => {
   };
 
   return (
-    <Box
-      id="download"
-      sx={{ py: 10, backgroundColor: 'background.default' }}
-    >
+    <Box id="download" sx={{ py: 10, backgroundColor: 'background.default' }}>
       <Container maxWidth="xl">
         <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography
-            variant="h2"
+          <Box
             sx={{
-              fontWeight: 'bold',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               mb: 2,
-              color: 'primary.main',
+              gap: 2,
             }}
           >
-            {t('title')}
-          </Typography>
+            <Download sx={{ fontSize: 48, color: 'primary.main' }} />
+            <Typography
+              variant="h2"
+              sx={{
+                fontWeight: 800,
+                background: 'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              {t('title')}
+            </Typography>
+          </Box>
           <Typography
             variant="h5"
             sx={{
               mb: 3,
               color: 'text.secondary',
               fontWeight: 400,
+              fontSize: '1.25rem',
             }}
           >
             {t('subtitle')}
@@ -148,7 +159,8 @@ export const DownloadSection = () => {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  background: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,.05) 10px, rgba(0,0,0,.05) 20px)',
+                  background:
+                    'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,.05) 10px, rgba(0,0,0,.05) 20px)',
                   pointerEvents: 'none',
                 }}
               />
@@ -205,9 +217,7 @@ export const DownloadSection = () => {
             <List>
               {requirements.map((requirement, index) => (
                 <ListItem key={index}>
-                  <ListItemIcon>
-                    {requirement.icon}
-                  </ListItemIcon>
+                  <ListItemIcon>{requirement.icon}</ListItemIcon>
                   <ListItemText
                     primary={requirement.text}
                     sx={{

@@ -41,18 +41,30 @@ export const LanguageSelector: React.FC = () => {
       return;
     }
 
-    // Set cookie and trigger page refresh
-    document.cookie = `lang=${langCode}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`;
-
     setIsOpen(false);
 
-    // Small delay to ensure cookie is set, then refresh
-    setTimeout(() => {
-      window.location.reload();
-    }, 50);
+    const pathname = window.location.pathname;
+    let newPath: string;
+
+    if (langCode === 'es') {
+      if (pathname.startsWith('/en')) {
+        newPath = pathname.replace('/en', '') || '/';
+      } else {
+        newPath = pathname;
+      }
+    } else if (langCode === 'en') {
+      if (pathname.startsWith('/en')) {
+        newPath = pathname;
+      } else {
+        newPath = '/en' + pathname;
+      }
+    } else {
+      newPath = pathname;
+    }
+
+    window.location.href = newPath;
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -70,7 +82,6 @@ export const LanguageSelector: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  // Close menu on escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isOpen) {

@@ -6,38 +6,52 @@ import {
   Container,
   Box,
   IconButton,
-  Menu,
-  MenuItem,
   useTheme,
   useMediaQuery,
   Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
 } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
+import {
+  Menu as MenuIcon,
+  Close as CloseIcon,
+  Info as InfoIcon,
+  TrendingUp as TrendingUpIcon,
+  Build as BuildIcon,
+  Group as GroupIcon,
+  Visibility as VisionIcon,
+  Download as DownloadIcon,
+} from '@mui/icons-material';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './Button';
 import { LanguageSelector } from './LanguageSelector';
 
 export const Navbar = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const t = useTranslations('navigation');
 
   const navigationItems = [
-    { key: 'about', href: '#about' },
-    { key: 'impact', href: '#impact' },
-    { key: 'howItWorks', href: '#how-it-works' },
-    { key: 'team', href: '#team' },
-    { key: 'vision', href: '#vision' },
+    { key: 'about', href: '#about', icon: InfoIcon },
+    { key: 'howItWorks', href: '#how-it-works', icon: BuildIcon },
+    { key: 'impact', href: '#impact', icon: TrendingUpIcon },
+    { key: 'team', href: '#team', icon: GroupIcon },
+    { key: 'vision', href: '#vision', icon: VisionIcon },
   ];
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false);
   };
 
   const scrollToSection = (href: string) => {
@@ -45,7 +59,7 @@ export const Navbar = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-    handleMenuClose();
+    handleMobileMenuClose();
   };
 
   return (
@@ -113,26 +127,154 @@ export const Navbar = () => {
 
             {isMobile && (
               <>
-                <IconButton onClick={handleMenuOpen} color="primary">
+                <IconButton
+                  onClick={handleMobileMenuToggle}
+                  color="primary"
+                  sx={{
+                    transition: 'transform 0.3s ease',
+                    '&:hover': {
+                      transform: 'rotate(90deg)',
+                    },
+                  }}
+                >
                   <MenuIcon />
                 </IconButton>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleMenuClose}
+
+                <Drawer
+                  anchor="right"
+                  open={mobileMenuOpen}
+                  onClose={handleMobileMenuClose}
+                  sx={{
+                    '& .MuiDrawer-paper': {
+                      width: 320,
+                      background:
+                        'linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.95) 100%)',
+                      backdropFilter: 'blur(20px)',
+                      borderLeft: '1px solid rgba(11, 114, 133, 0.1)',
+                      boxShadow: '-10px 0 30px rgba(0,0,0,0.1)',
+                    },
+                  }}
                 >
-                  {navigationItems.map(item => (
-                    <MenuItem
-                      key={item.key}
-                      onClick={() => scrollToSection(item.href)}
+                  <Box sx={{ pt: 3, pb: 2, height: '100%' }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        px: 3,
+                        mb: 3,
+                      }}
                     >
-                      {t(item.key as any)}
-                    </MenuItem>
-                  ))}
-                  <MenuItem onClick={() => scrollToSection('#download')}>
-                    {t('download')}
-                  </MenuItem>
-                </Menu>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 'bold',
+                          background:
+                            'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                          backgroundClip: 'text',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                        }}
+                      >
+                        Bridge
+                      </Typography>
+                      <IconButton
+                        onClick={handleMobileMenuClose}
+                        sx={{
+                          color: 'text.secondary',
+                          '&:hover': {
+                            color: 'primary.main',
+                            transform: 'rotate(90deg)',
+                          },
+                          transition: 'all 0.3s ease',
+                        }}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </Box>
+
+                    <Divider sx={{ mb: 2, mx: 2 }} />
+
+                    <List sx={{ px: 0, overflow: 'hidden' }}>
+                      <AnimatePresence>
+                        {navigationItems.map((item, index) => {
+                          const IconComponent = item.icon;
+                          return (
+                            <motion.div
+                              key={item.key}
+                              initial={{ opacity: 0, x: 50 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: index * 0.1, duration: 0.3 }}
+                            >
+                              <ListItem
+                                onClick={() => scrollToSection(item.href)}
+                                sx={{
+                                  borderRadius: 2,
+                                  mb: 1,
+                                  mx: 2,
+                                  cursor: 'pointer',
+                                  transition: 'all 0.3s ease',
+                                  '&:hover': {
+                                    backgroundColor: 'rgba(11, 114, 133, 0.08)',
+                                    transform: 'translateX(4px)',
+                                    boxShadow:
+                                      '0 4px 12px rgba(11, 114, 133, 0.15)',
+                                  },
+                                }}
+                              >
+                                <ListItemIcon
+                                  sx={{ minWidth: 40, color: 'primary.main' }}
+                                >
+                                  <IconComponent />
+                                </ListItemIcon>
+                                <ListItemText
+                                  primary={t(item.key as any)}
+                                  primaryTypographyProps={{
+                                    fontWeight: 500,
+                                    fontSize: '1.1rem',
+                                  }}
+                                />
+                              </ListItem>
+                            </motion.div>
+                          );
+                        })}
+                      </AnimatePresence>
+                    </List>
+
+                    <Divider sx={{ my: 2, mx: 2 }} />
+
+                    <Box sx={{ px: 3, mt: 'auto' }}>
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6, duration: 0.3 }}
+                      >
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          fullWidth
+                          onClick={() => scrollToSection('#download')}
+                          startIcon={<DownloadIcon />}
+                          sx={{
+                            py: 1.5,
+                            fontSize: '1.1rem',
+                            borderRadius: 3,
+                            background:
+                              'linear-gradient(135deg, #0B7285 0%, #66D9E8 100%)',
+                            boxShadow: '0 8px 25px rgba(11, 114, 133, 0.3)',
+                            '&:hover': {
+                              transform: 'translateY(-2px)',
+                              boxShadow: '0 12px 35px rgba(11, 114, 133, 0.4)',
+                            },
+                            transition: 'all 0.3s ease',
+                          }}
+                        >
+                          {t('download')}
+                        </Button>
+                      </motion.div>
+                    </Box>
+                  </Box>
+                </Drawer>
               </>
             )}
           </Box>
